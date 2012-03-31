@@ -2,5 +2,7 @@ package biz.lazysoft.cdh;
 
 public enum Names {
 
-	monster1
+	spider,
+	map0,
+	cannon
 }

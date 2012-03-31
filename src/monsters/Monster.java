@@ -1,21 +1,19 @@
 package monsters;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
-import org.anddev.andengine.opengl.texture.ITexture;
-import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
-
 
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.TM;
+import biz.lazysoft.cdh.Track;
 
 
 
 public abstract class Monster extends AnimatedSprite {
 
-	float speed=1;
-	float energy=1;
-	float power=1;
+	private float speed=1;
+	private float energy=1;
+	private float power=1;
 	boolean hidden=false;
 	Colors color;
 	
@@ -28,7 +26,27 @@ public abstract class Monster extends AnimatedSprite {
 		color = tColor;
 	}
 	
+	public void move(Track tTrack) {
+		float length = tTrack.path.getLength();
+		if (length != 0)
+			this.registerEntityModifier(tTrack.getPathModifer(this));
+
+	}
 	
+	public float getSpeed()
+	{
+		return speed;
+	}
+	
+	public float getEnergy()
+	{
+		return energy;
+	}
+	
+	public float getPower()
+	{
+		return power;
+	}
 		
 	
 }

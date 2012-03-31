@@ -33,20 +33,16 @@ public class Tower extends AnimatedSprite {
 		this.attachChild(spriteRange);
 		
 	}
-
-
-
-
 	
 	public float getRotationAngle(Monster monster){
-		float x = Math.abs(monster.getX() - getX());
-		float y = Math.abs(monster.getY() - getY());
+		float x = monster.getX() - getX();
+		float y = monster.getY() - getY();
 		if(x != 0)
-			return (float) Math.toDegrees(Math.atan(y/x));
+			return (float) Math.toDegrees(Math.atan(y/x)) + 90;
 		return 0;
 	}
 	
-		public float getRate()
+	public float getRate()
 	{
 		return rate[level];
 	}

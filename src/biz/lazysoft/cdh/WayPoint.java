@@ -6,7 +6,7 @@ public class WayPoint {
 	private float y;
 	private float rotate;
 
-	WayPoint(float x, float y, float rotate) {
+	public WayPoint(float x, float y, float rotate) {
 		this.x = x;
 		this.y = y;
 		this.rotate = rotate;

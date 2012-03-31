@@ -5,5 +5,9 @@ public enum Names {
 	spider,
 	map0,
 	cannon,
-	range
+	range,
+	bullet,
+	walus,
+	rectangl,
+	octopus
 }

@@ -3,6 +3,7 @@ package biz.lazysoft.cdh;
 import java.util.ArrayList;
 
 import monsters.Monster;
+import monsters.Octopus;
 import monsters.Spider;
 
 import org.anddev.andengine.engine.Engine;
@@ -17,7 +18,6 @@ import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
-import org.anddev.andengine.util.Debug;
 
 import towers.Cannon;
 
@@ -47,8 +47,12 @@ public class CdhActivity extends  BaseGame{
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
 		TM.add(Names.spider,loadTiledTextureRegion("monsters/spider_tiled.png", 1024, 1024,1,4));
+		TM.add(Names.walus,loadTiledTextureRegion("monsters/walus_tiled.png", 1024, 1024,1,4));
+		TM.add(Names.rectangl,loadTiledTextureRegion("monsters/rectangl_tiled.png", 1024, 1024,1,4));
+		TM.add(Names.octopus,loadTiledTextureRegion("monsters/octopus_tiled.png", 1024, 1024,1,4));
 		TM.add(Names.map0,loadTextureRegion("levels/level1map.png", 2048, 1024));
 		TM.add(Names.cannon, loadTiledTextureRegion("towers/cannon.png", 1024, 1024, 1,1));
+		TM.add(Names.bullet, loadTiledTextureRegion("bullet.png", 1024, 1024, 1,1));
 		TM.add(Names.range,loadTextureRegion("range.png", 2048, 1024));
 
 	}
@@ -60,10 +64,12 @@ public class CdhActivity extends  BaseGame{
 		Scene scene = new Scene();
 		Sprite background = new Sprite(0, 0, TM.getTR(Names.map0));
 		scene.attachChild(background);
-		Spider spider1 = new Spider();
-		Spider spider2 = new Spider();
+		Octopus spider1 = new Octopus();
+		final Spider spider2 = new Spider();
 		monsters.add(spider1);
 		monsters.add(spider2);
+		scene.attachChild(spider1);
+		scene.attachChild(spider2);
 		cannon1 = new Cannon();
 		final Track track = new Track();
 		track.setTrack(new WayPoint(220, 0, 180),new WayPoint(220, 600, 90));
@@ -73,19 +79,18 @@ public class CdhActivity extends  BaseGame{
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				//spider2.move(track);
+				spider2.move(track);
 				return super
 						.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
 			}
 		};
-		scene.attachChild(spider1);
-		scene.attachChild(spider2);
+		
 		scene.attachChild(cannon1);
 		cannon1.setPosition(50, 360);
 		cannon1.setRotation(0);
 		scene.registerTouchArea(bt1);
 		spider1.move(track);	
-		spider1.setPosition(0, 0);
+		spider1.setPosition(0, 0);		
 		
 		TimerHandler timer = new TimerHandler(0.1f, true,
 				new ITimerCallback() {

@@ -9,8 +9,11 @@ import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.util.Debug;
 
+import biz.lazysoft.cdh.Bullet;
 import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.TM;
+import biz.lazysoft.cdh.Track;
+import biz.lazysoft.cdh.WayPoint;
 
 public class Tower extends AnimatedSprite {
 
@@ -30,7 +33,7 @@ public class Tower extends AnimatedSprite {
 		range = new float[3];
 		cost = new float[3];
 		spriteRange = new Sprite(0,0,TM.getTR(Names.range));
-		this.attachChild(spriteRange);
+		this.attachChild(spriteRange);		
 		
 	}
 	
@@ -67,7 +70,7 @@ public class Tower extends AnimatedSprite {
 		yb = monster.getY();
 		float distance = (float) Math.sqrt(Math.pow((xa - xb), 2)
 				+ Math.pow((ya - yb), 2));
-		if (distance <= getRange())
+		if (distance-15 <= getRange())
 			return true;
 		else
 			return false;
@@ -77,6 +80,13 @@ public class Tower extends AnimatedSprite {
 		if (isInRange(monster)) {
 			if (new Date().getTime() - lastFire > getRate()) {
 				lastFire = new Date().getTime();
+				WayPoint start = new WayPoint(this.getX()+(this.getWidth()/2),this.getY()+(this.getHeight()/2),0);
+				WayPoint end = new WayPoint(monster.getX()+(monster.getWidth()/2),monster.getY()+(monster.getHeight()/2),0);
+				Track track = new Track();
+				track.setTrack(start,end);
+				Bullet bullet = new Bullet(getDamage(),monster);
+				this.getParent().attachChild(bullet);
+				bullet.move(track);				
 				return true;
 			}
 		}
@@ -88,7 +98,8 @@ public class Tower extends AnimatedSprite {
 		if(target!=null && isInRange(target)==true)
 		{
 			this.setRotation(getRotationAngle (target));
-			Debug.d("NAMIERZONY    angel="+getRotationAngle (target));
+			
+			Debug.d("NAMIERZONY    angel="+getRotationAngle (target)+"FIRE: "+fire(target));
 		}
 		else
 		{
@@ -112,9 +123,6 @@ public class Tower extends AnimatedSprite {
 		
 	}
 	
-	float calcAngle(Monster monster)
-	{
-		return 90;
-	}
+
 
 }

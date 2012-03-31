@@ -29,7 +29,7 @@ public abstract class Monster extends AnimatedSprite {
 	public void move(Track tTrack) {
 		float length = tTrack.path.getLength();
 		if (length != 0)
-			this.registerEntityModifier(tTrack.getPathModifer(this));
+			this.registerEntityModifier(tTrack.getPathModiferMonster(this));
 
 	}
 	
@@ -46,6 +46,12 @@ public abstract class Monster extends AnimatedSprite {
 	public float getPower()
 	{
 		return power;
+	}
+	
+	public void hit(float damage)
+	{
+		energy-=damage;
+		if(energy<=0)this.setVisible(false);
 	}
 		
 	

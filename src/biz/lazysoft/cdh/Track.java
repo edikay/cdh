@@ -6,6 +6,9 @@ import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.modifier.PathModifier;
 import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
+import org.anddev.andengine.util.Debug;
+
+import towers.Tower;
 
 public class Track {
 
@@ -24,7 +27,7 @@ public class Track {
 		}
 	}
 
-	public PathModifier getPathModifer(final Monster monster) {
+	public PathModifier getPathModiferMonster(final Monster monster) {
 
 		duration = path.getLength() / monster.getSpeed();
 		return new PathModifier(duration, path, null,
@@ -56,5 +59,45 @@ public class Track {
 				});
 
 	}
+	
+	public PathModifier getPathModiferBullet(final Bullet bullet) {
+
+		duration = path.getLength() / bullet.getSpeed();
+		return new PathModifier(duration, path, null,
+				new IPathModifierListener() {
+					@Override
+					public void onPathStarted(final PathModifier pPathModifier,
+							final IEntity pEntity) {
+						//bullet.animate(150, true);
+						Debug.d("BULLET START");
+					}
+
+					@Override
+					public void onPathWaypointStarted(
+							final PathModifier pPathModifier,
+							final IEntity pEntity, final int pWaypointIndex) {						
+					}
+
+					@Override
+					public void onPathWaypointFinished(
+							final PathModifier pPathModifier,
+							final IEntity pEntity, final int pWaypointIndex) {
+					}
+
+					@Override
+					public void onPathFinished(
+							final PathModifier pPathModifier,
+							final IEntity pEntity) {
+						bullet.hit();
+						bullet.setVisible(false);
+						Debug.d("BULLET STOP");
+							
+						
+					}
+				});
+
+	}
+	
+	
 
 }

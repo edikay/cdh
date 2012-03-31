@@ -19,6 +19,7 @@ public abstract class Monster extends AnimatedSprite {
 	boolean hidden=false;
 	Colors color;
 	
+	
 	public Monster(Names name,float tSpeed,float tEnergy,float tPower,Colors tColor) {
 		super(0, 0, TM.getTTR(name));		
 		speed = tSpeed;

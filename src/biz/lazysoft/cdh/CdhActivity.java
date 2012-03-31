@@ -1,5 +1,7 @@
 package biz.lazysoft.cdh;
 
+import monsters.Spider;
+
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.options.EngineOptions;
@@ -37,7 +39,7 @@ public class CdhActivity extends  BaseGame{
 	public void onLoadResources() {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-		bmp = loadTextureRegion("rect2985.png", 2048, 1024);
+		TM.add(Names.monster1,loadTiledTextureRegion("spider.png", 1024, 1024,1,1));
 		
 
 	}
@@ -46,8 +48,8 @@ public class CdhActivity extends  BaseGame{
 	public Scene onLoadScene() {
 
 		Scene scene = new Scene();
-		Sprite background = new Sprite(0, 0, bmp);
-		scene.attachChild(background);
+		Spider spider1 = new Spider();
+		scene.attachChild(spider1);
 		
 		return scene;
 	}

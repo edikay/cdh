@@ -34,7 +34,20 @@ public class Tower extends AnimatedSprite {
 		
 	}
 
-	public float getRate() {
+
+
+
+	
+	public float getRotationAngle(Monster monster){
+		float x = Math.abs(monster.getX() - getX());
+		float y = Math.abs(monster.getY() - getY());
+		if(x != 0)
+			return (float) Math.toDegrees(Math.atan(y/x));
+		return 0;
+	}
+	
+		public float getRate()
+	{
 		return rate[level];
 	}
 
@@ -78,8 +91,8 @@ public class Tower extends AnimatedSprite {
 	{
 		if(target!=null && isInRange(target)==true)
 		{
-			this.setRotation(calcAngle(target));
-			Debug.d("NAMIERZONY");
+			this.setRotation(getRotationAngle (target));
+			Debug.d("NAMIERZONY    angel="+getRotationAngle (target));
 		}
 		else
 		{

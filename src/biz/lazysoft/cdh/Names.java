@@ -4,5 +4,6 @@ public enum Names {
 
 	spider,
 	map0,
-	cannon
+	cannon,
+	range
 }

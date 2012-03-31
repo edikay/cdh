@@ -32,6 +32,7 @@ public class Track {
 					@Override
 					public void onPathStarted(final PathModifier pPathModifier,
 							final IEntity pEntity) {
+						monster.animate(150, true);
 					}
 
 					@Override

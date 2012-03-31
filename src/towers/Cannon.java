@@ -8,7 +8,7 @@ public class Cannon extends Tower{
 
 	public Cannon() {
 		super(Names.cannon);
-		rate[0] = 500;
+		rate[0] = 2000;
 		rate[1] = 400;
 		rate[2] = 300;
 		
@@ -17,12 +17,13 @@ public class Cannon extends Tower{
 		damage[2] = 30;
 		
 		range[0] = 200;
-		range[1] = 220;
-		range[2] = 230;
+		range[1] = 200;
+		range[2] = 200;
 		
 		cost[0] = 10;
 		cost[1] = 20;
 		cost[2] = 30;
+		setSpriteRange();
 	}
 	
 

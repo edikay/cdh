@@ -9,5 +9,6 @@ public class CdhActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        //Widzisz to?
     }
 }

@@ -29,6 +29,14 @@ public class Tower extends AnimatedSprite{
 		Debug.d("Current date= "+lastFire);
 	}
 	
+	public float getRotationAngle(Monster monster){
+		float x = Math.abs(monster.getX() - getX());
+		float y = Math.abs(monster.getY() - getY());
+		if(x != 0)
+			return (float) Math.atan(y/x);
+		return 0;
+	}
+	
 	public float getRate()
 	{
 		return rate[level];

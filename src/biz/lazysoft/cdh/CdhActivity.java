@@ -3,8 +3,8 @@ package biz.lazysoft.cdh;
 import java.util.ArrayList;
 
 import monsters.Monster;
-import monsters.Octopus;
 import monsters.Spider;
+import monsters.Walus;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
@@ -29,7 +29,7 @@ public class CdhActivity extends  BaseGame{
 	private Camera mCamera;
 	ArrayList<Monster> monsters;	
 	Cannon cannon1;
-	
+	public static Scene scene;
 
 	
 	@Override
@@ -61,10 +61,10 @@ public class CdhActivity extends  BaseGame{
 	public Scene onLoadScene() {
 
 		monsters = new ArrayList<Monster>();
-		Scene scene = new Scene();
+		scene = new Scene();
 		Sprite background = new Sprite(0, 0, TM.getTR(Names.map0));
 		scene.attachChild(background);
-		Octopus spider1 = new Octopus();
+		Walus spider1 = new Walus();
 		final Spider spider2 = new Spider();
 		monsters.add(spider1);
 		monsters.add(spider2);

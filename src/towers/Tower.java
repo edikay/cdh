@@ -10,6 +10,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.util.Debug;
 
 import biz.lazysoft.cdh.Bullet;
+import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.TM;
 import biz.lazysoft.cdh.Track;
@@ -25,6 +26,7 @@ public class Tower extends AnimatedSprite {
 	long lastFire;
 	Sprite spriteRange;
 	Monster target=null;
+	Colors color;
 
 	public Tower(Names name) {
 		super(0, 0, 90, 90, TM.getTTR(name));
@@ -60,6 +62,16 @@ public class Tower extends AnimatedSprite {
 
 	public float getCost() {
 		return cost[level];
+	}
+	
+	public Colors getColor()
+	{
+		return color;
+	}
+	
+	public void setColor(Colors tColor)
+	{
+		color=tColor;
 	}
 
 	private boolean isInRange(Monster monster) {
@@ -115,6 +127,16 @@ public class Tower extends AnimatedSprite {
 				}
 			}
 		}
+	}
+	
+	public void setLevel(int tLevel)
+	{
+		level=tLevel;
+	}
+	
+	public int getLevel()
+	{
+		return level;
 	}
 	
 	void setSpriteRange()

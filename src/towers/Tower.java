@@ -26,21 +26,25 @@ public class Tower extends AnimatedSprite {
 	float[] range;
 	float[] cost;
 	int level = 0;
-	private Colors color=Colors.red;
+	Colors color;
+
+	private Colors bulletColor = Colors.red;
 
 	private long lastFire;
 	private Sprite spriteRange;
 	private Monster target = null;
-	
+
 	private TowerMenu towerMenu;
 
-	public Tower(Names name) {
+	public Tower(Names name, Colors tColor) {
 		super(0, 0, 90, 90, TM.getTTR(name));
 		rate = new float[3];
 		damage = new float[3];
 		range = new float[3];
 		cost = new float[3];
+		color = tColor;
 		spriteRange = new Sprite(0, 0, TM.getTR(Names.range));
+		spriteRange.setVisible(false);
 		this.attachChild(spriteRange);
 		towerMenu = new TowerMenu(this);
 		CdhActivity.scene.attachChild(towerMenu);
@@ -60,7 +64,18 @@ public class Tower extends AnimatedSprite {
 	}
 
 	public float getDamage() {
-		return damage[level];
+		
+		if (color == bulletColor)
+		{
+			Debug.d("Damage = "+damage[level] * (1 + (getLevel() + 1) * 0.1f));
+			return damage[level] * (1 + (getLevel() + 1) * 0.1f);
+			
+		}
+		else
+		{
+			Debug.d("Damage = "+damage[level]);
+			return damage[level];
+		}
 	}
 
 	public float getRange() {
@@ -71,12 +86,16 @@ public class Tower extends AnimatedSprite {
 		return cost[level];
 	}
 
-	public Colors getColor() {
-		return color;
+	public Colors getBulletColor() {
+		return bulletColor;
 	}
 
-	public void setColor(Colors tColor) {
-		color = tColor;
+	public void setBulletColor(Colors tColor) {
+		bulletColor = tColor;
+	}
+
+	public Colors getColor() {
+		return color;
 	}
 
 	private boolean isInRange(Monster monster) {
@@ -97,17 +116,18 @@ public class Tower extends AnimatedSprite {
 		if (isInRange(monster)) {
 			if (new Date().getTime() - lastFire > getRate()) {
 				lastFire = new Date().getTime();
-				
+
 				WayPoint start = new WayPoint(this.getX()
 						+ (this.getWidth() / 2), this.getY()
 						+ (this.getHeight() / 2), 0);
 				WayPoint end = new WayPoint(monster.getX()
 						+ (monster.getWidth() / 2), monster.getY()
 						+ (monster.getHeight() / 2), 0);
-				
+
 				Track track = new Track();
 				track.setTrack(start, end);
-				Bullet bullet = new Bullet(getColor(),getDamage(), monster);
+				Bullet bullet = new Bullet(getBulletColor(), getDamage(),
+						monster);
 				this.getParent().attachChild(bullet);
 				bullet.move(track);
 				this.animate(100, false);
@@ -142,12 +162,13 @@ public class Tower extends AnimatedSprite {
 	public int getLevel() {
 		return level;
 	}
-
-	void setSpriteRange() {
+	
+	private void setSpriteRange() {
 		spriteRange.setSize(getRange() * 2, getRange() * 2);
 		spriteRange.setPosition((this.getWidth() / 2)
 				- (spriteRange.getWidth() / 2), (this.getHeight() / 2)
 				- (spriteRange.getHeight() / 2));
+		spriteRange.setVisible(true);
 
 	}
 
@@ -167,10 +188,14 @@ public class Tower extends AnimatedSprite {
 
 		towerMenu.setPosition(tX, tY);
 		towerMenu.setVisible(true);
+		
+		setSpriteRange();
+		
 	}
 
 	public void hideTowerMenu() {
 		towerMenu.setVisible(false);
+		spriteRange.setVisible(false);
 	}
 
 	@Override

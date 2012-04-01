@@ -3,7 +3,7 @@ package biz.lazysoft.cdh;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
-import org.anddev.andengine.util.Debug;
+
 
 import towers.Tower;
 
@@ -69,13 +69,13 @@ public class TowerMenu extends Sprite {
 		switch (color) // ustawienie koloru wiezyczki
 		{
 		case 0:
-			tower.setColor(Colors.red);
+			tower.setBulletColor(Colors.red);
 			break;
 		case 1:
-			tower.setColor(Colors.purple);
+			tower.setBulletColor(Colors.purple);
 			break;
 		case 2:
-			tower.setColor(Colors.blue);
+			tower.setBulletColor(Colors.blue);
 			break;
 		}
 		refresh();
@@ -99,9 +99,9 @@ public class TowerMenu extends Sprite {
 			colors[2].setCurrentTileIndex(2, 1);
 			break;
 		}
-		if(tower.getColor()==Colors.red) colors[0].setCurrentTileIndex(0,0);
-		else if(tower.getColor()==Colors.purple) colors[1].setCurrentTileIndex(1,0);
-		else if(tower.getColor()==Colors.blue) colors[2].setCurrentTileIndex(2,0);
+		if(tower.getBulletColor()==Colors.red) colors[0].setCurrentTileIndex(0,0);
+		else if(tower.getBulletColor()==Colors.purple) colors[1].setCurrentTileIndex(1,0);
+		else if(tower.getBulletColor()==Colors.blue) colors[2].setCurrentTileIndex(2,0);
 	}
 
 	@Override

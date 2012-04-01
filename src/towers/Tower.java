@@ -97,15 +97,17 @@ public class Tower extends AnimatedSprite {
 		if (isInRange(monster)) {
 			if (new Date().getTime() - lastFire > getRate()) {
 				lastFire = new Date().getTime();
+				
 				WayPoint start = new WayPoint(this.getX()
 						+ (this.getWidth() / 2), this.getY()
 						+ (this.getHeight() / 2), 0);
 				WayPoint end = new WayPoint(monster.getX()
 						+ (monster.getWidth() / 2), monster.getY()
 						+ (monster.getHeight() / 2), 0);
+				
 				Track track = new Track();
 				track.setTrack(start, end);
-				Bullet bullet = new Bullet(getDamage(), monster);
+				Bullet bullet = new Bullet(getColor(),getDamage(), monster);
 				this.getParent().attachChild(bullet);
 				bullet.move(track);
 				this.animate(100, false);

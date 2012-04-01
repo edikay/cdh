@@ -1,17 +1,19 @@
 package biz.lazysoft.cdh;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
+import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
+import org.anddev.andengine.util.Debug;
 
 import towers.Tower;
 
-public class TowerMenu extends AnimatedSprite {
+public class TowerMenu extends Sprite {
 
 	private Tower tower;
 	AnimatedSprite colors[] = new AnimatedSprite[3];
 
 	public TowerMenu(Tower tTower) {
-		super(0, 0, 260, 190, TM.getTTR(Names.towermenubg));
+		super(0, 0, 260, 190, TM.getTR(Names.towermenubg));
 		tower = tTower;
 
 		colors[0] = new AnimatedSprite((0) * 86, 0,
@@ -19,7 +21,9 @@ public class TowerMenu extends AnimatedSprite {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-
+				if (tower.getLevel() >= 0) {
+					setTowerLevel(0);
+				}
 				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 						pTouchAreaLocalY);
 			}
@@ -30,7 +34,9 @@ public class TowerMenu extends AnimatedSprite {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-
+				if (tower.getLevel() >= 1) {
+					setTowerLevel(1);
+				}
 				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 						pTouchAreaLocalY);
 			}
@@ -41,7 +47,9 @@ public class TowerMenu extends AnimatedSprite {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-
+				if (tower.getLevel() >= 2) {
+					setTowerLevel(2);
+				}
 				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 						pTouchAreaLocalY);
 			}
@@ -50,16 +58,35 @@ public class TowerMenu extends AnimatedSprite {
 		for (AnimatedSprite as : colors) {
 			this.attachChild(as);
 			CdhActivity.scene.registerTouchArea(as);
-		}
+		}		
 	}
 
 	void setTowerLevel(int color) {
 		
-		switch (tower.getLevel()) { //wyzerownie odpowiednio do levelu
+
+		//colors[color].setCurrentTileIndex(color, 0); // ustawienie wybranego
+														// koloru przycisku
+		switch (color) // ustawienie koloru wiezyczki
+		{
 		case 0:
-			colors[0].setCurrentTileIndex(0, 0);
+			tower.setColor(Colors.red);
+			break;
+		case 1:
+			tower.setColor(Colors.purple);
+			break;
+		case 2:
+			tower.setColor(Colors.blue);
+			break;
+		}
+		refresh();
+	}
+
+	void refresh() {
+		switch (tower.getLevel()) { // wyzerownie odpowiednio do levelu
+		case 0:
+			colors[0].setCurrentTileIndex(0, 1);
 			colors[1].setCurrentTileIndex(3, 0);
-			colors[2].setCurrentTileIndex(3, 0);			
+			colors[2].setCurrentTileIndex(3, 0);
 			break;
 		case 1:
 			colors[0].setCurrentTileIndex(0, 1);
@@ -69,18 +96,18 @@ public class TowerMenu extends AnimatedSprite {
 		case 2:
 			colors[0].setCurrentTileIndex(0, 1);
 			colors[1].setCurrentTileIndex(1, 1);
-			colors[2].setCurrentTileIndex(2, 1);			
+			colors[2].setCurrentTileIndex(2, 1);
 			break;
 		}
-		
-		colors[color].setCurrentTileIndex(color, 0); //ustawienie wybranego koloru przycisku
-		
-		switch(color) //ustawienie koloru wiezyczki
-		{
-		case 0: tower.setColor(Colors.red); break;
-		case 1: tower.setColor(Colors.purple); break;
-		case 2: tower.setColor(Colors.blue); break;
-		}
+		if(tower.getColor()==Colors.red) colors[0].setCurrentTileIndex(0,0);
+		else if(tower.getColor()==Colors.purple) colors[1].setCurrentTileIndex(1,0);
+		else if(tower.getColor()==Colors.blue) colors[2].setCurrentTileIndex(2,0);
+	}
+
+	@Override
+	public void setVisible(boolean pVisible) {
+		refresh();
+		super.setVisible(pVisible);
 	}
 
 }

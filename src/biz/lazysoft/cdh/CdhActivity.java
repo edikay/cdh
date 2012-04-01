@@ -54,6 +54,8 @@ public class CdhActivity extends  BaseGame{
 		TM.add(Names.cannon, loadTiledTextureRegion("towers/cannon.png", 1024, 1024, 1,2));
 		TM.add(Names.bullet, loadTiledTextureRegion("bullet.png", 1024, 1024, 1,1));
 		TM.add(Names.range,loadTextureRegion("range.png", 2048, 1024));
+		TM.add(Names.towermenubg,loadTextureRegion("misc/tower_menu.png", 2048, 1024));
+		TM.add(Names.towermenucolors, loadTiledTextureRegion("misc/tower_menu_elems.png", 1024, 1024, 4,4));
 
 	}
 
@@ -88,6 +90,8 @@ public class CdhActivity extends  BaseGame{
 		scene.attachChild(cannon1);
 		cannon1.setPosition(50, 360);
 		cannon1.setRotation(0);
+		cannon1.setLevel(1);
+		scene.registerTouchArea(cannon1);
 		scene.registerTouchArea(bt1);
 		spider1.move(track);	
 		spider1.setPosition(0, 0);		

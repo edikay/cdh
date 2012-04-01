@@ -9,21 +9,21 @@ public class Cannon extends Tower{
 
 	public Cannon() {
 		super(Names.cannon,Colors.red);
-		rate[0] = 2000;
-		rate[1] = 400;
-		rate[2] = 300;
+		rate[0] = 1500;
+		rate[1] = 1250;
+		rate[2] = 1000;
 		
-		damage[0] = 100;
-		damage[1] = 100;
-		damage[2] = 100;
+		damage[0] = 150;
+		damage[1] = 250;
+		damage[2] = 350;
 		
-		range[0] = 200;
-		range[1] = 200;
-		range[2] = 200;
+		range[0] = 250;
+		range[1] = 300;
+		range[2] = 350;
 		
-		cost[0] = 10;
-		cost[1] = 20;
-		cost[2] = 30;
+		cost[0] = 120;
+		cost[1] = 120;
+		cost[2] = 200;
 		
 	}
 	

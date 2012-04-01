@@ -13,8 +13,7 @@ public abstract class Monster extends AnimatedSprite {
 
 	private float speed=1;
 	private float energy=1;
-	private float power=1;
-	boolean hidden=false;
+	private float power=1;	
 	Colors color;
 	
 	

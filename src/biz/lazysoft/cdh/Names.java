@@ -9,5 +9,7 @@ public enum Names {
 	bullet,
 	walus,
 	rectangl,
-	octopus
+	octopus,
+	towermenubg,
+	towermenucolors
 }

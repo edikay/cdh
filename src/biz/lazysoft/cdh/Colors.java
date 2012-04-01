@@ -2,7 +2,12 @@ package biz.lazysoft.cdh;
 
 public enum Colors {
 	red,
-	white,
-	green
+	purple,
+	blue,
+	green,
+	brown,
+	black,
+	orange,
+
 
 }

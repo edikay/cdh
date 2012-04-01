@@ -86,7 +86,8 @@ public class Tower extends AnimatedSprite {
 				track.setTrack(start,end);
 				Bullet bullet = new Bullet(getDamage(),monster);
 				this.getParent().attachChild(bullet);
-				bullet.move(track);				
+				bullet.move(track);		
+				this.animate(100, false);
 				return true;
 			}
 		}

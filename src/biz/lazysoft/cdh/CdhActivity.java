@@ -51,7 +51,7 @@ public class CdhActivity extends  BaseGame{
 		TM.add(Names.rectangl,loadTiledTextureRegion("monsters/rectangl_tiled.png", 1024, 1024,1,4));
 		TM.add(Names.octopus,loadTiledTextureRegion("monsters/octopus_tiled.png", 1024, 1024,1,4));
 		TM.add(Names.map0,loadTextureRegion("levels/level1map.png", 2048, 1024));
-		TM.add(Names.cannon, loadTiledTextureRegion("towers/cannon.png", 1024, 1024, 1,1));
+		TM.add(Names.cannon, loadTiledTextureRegion("towers/cannon.png", 1024, 1024, 1,2));
 		TM.add(Names.bullet, loadTiledTextureRegion("bullet.png", 1024, 1024, 1,1));
 		TM.add(Names.range,loadTextureRegion("range.png", 2048, 1024));
 

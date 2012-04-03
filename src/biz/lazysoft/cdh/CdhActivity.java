@@ -13,6 +13,7 @@ import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
@@ -20,6 +21,7 @@ import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 
 import towers.Cannon;
+import towers.Tower;
 
 public class CdhActivity extends  BaseGame{
    
@@ -30,6 +32,7 @@ public class CdhActivity extends  BaseGame{
 	ArrayList<Monster> monsters;	
 	Cannon cannon1;
 	public static Scene scene;
+	LevelManager lm;
 
 	
 	@Override
@@ -61,9 +64,10 @@ public class CdhActivity extends  BaseGame{
 
 	@Override
 	public Scene onLoadScene() {
-
+		
 		monsters = new ArrayList<Monster>();
 		scene = new Scene();
+		lm = new LevelManager(scene);
 		Sprite background = new Sprite(0, 0, TM.getTR(Names.map0));
 		scene.attachChild(background);
 		Walus spider1 = new Walus();
@@ -87,11 +91,12 @@ public class CdhActivity extends  BaseGame{
 			}
 		};
 		
-		scene.attachChild(cannon1);
+		//scene.attachChild(cannon1);
+		
 		cannon1.setPosition(50, 360);
 		cannon1.setRotation(0);
 		cannon1.setLevel(1);
-		scene.registerTouchArea(cannon1);
+		
 		scene.registerTouchArea(bt1);
 		spider1.move(track);	
 		spider1.setPosition(0, 0);		
@@ -103,14 +108,17 @@ public class CdhActivity extends  BaseGame{
 					public void onTimePassed(TimerHandler pTimerHandler) {
 						
 						
-						
-						cannon1.checkFire(monsters);
+					
+						for(Tower tower:lm.getTowers())
+						{
+							tower.checkFire(monsters);
+						}
 						
 
 					}
 				});
 		scene.registerUpdateHandler(timer);
-		
+		lm.addTower(cannon1);
 		//Sprite range = new Sprite(500, 500, 90, 90, TM.getTR(Names.range));
 		//scene.attachChild(range);
 		
@@ -120,7 +128,13 @@ public class CdhActivity extends  BaseGame{
 
 	@Override
 	public void onLoadComplete() {
-		// TODO Auto-generated method stub
+		//scene.detachChild(cannon1);
+		//cannon1 = null;
 		
+	}
+	
+	public static void add(IEntity entity)
+	{
+		scene.attachChild(entity);
 	}
 }

@@ -2,9 +2,9 @@ package biz.lazysoft.cdh;
 
 import java.util.ArrayList;
 
-import org.anddev.andengine.entity.IEntity;
+import monsters.Monster;
+
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 
 import towers.Tower;
 
@@ -12,12 +12,35 @@ public class LevelManager {
 
 	Scene scene;
 	
+	ArrayList<Monster> monsters = new ArrayList<Monster>();
 	ArrayList<Tower> towers = new ArrayList<Tower>();
+	
 	
 	LevelManager(Scene tScene)
 	{
 		scene=tScene;
 	}
+	
+	//Monster
+	
+	public void addMonster(Monster tMonster)
+	{
+		scene.attachChild(tMonster);			
+		monsters.add(tMonster);
+	}
+	
+	public ArrayList<Monster> getMonsters()
+	{
+		return monsters;
+	}
+	
+	public void removeMonster(Monster tMonster)
+	{
+		scene.detachChild(tMonster);
+		monsters.remove(tMonster);
+	}
+	
+	//Tower
 	
 	public void addTower(Tower tTower)
 	{

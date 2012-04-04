@@ -106,7 +106,7 @@ public class TowerMenu extends Sprite {
 
 	@Override
 	public void setVisible(boolean pVisible) {
-		//refresh();
+		refresh();
 		super.setVisible(pVisible);
 	}
 

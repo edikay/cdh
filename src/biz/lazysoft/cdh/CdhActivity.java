@@ -68,11 +68,17 @@ public class CdhActivity extends  BaseGame{
 		lm = new LevelManager(scene);
 		Sprite background = new Sprite(0, 0, TM.getTR(Names.map0));
 		scene.attachChild(background);
+		
 		Walus spider1 = new Walus();
 		final Spider spider2 = new Spider();
 		lm.addMonster(spider1);
 		lm.addMonster(spider2);		
+		
 		Cannon cannon1 = new Cannon();
+		cannon1.setPosition(50, 360);		
+		cannon1.setLevel(1);
+		lm.addTower(cannon1);
+		
 		final Track track = new Track();
 		track.setTrack(new WayPoint(220, 0, 180),new WayPoint(220, 600, 90));
 		
@@ -86,13 +92,12 @@ public class CdhActivity extends  BaseGame{
 						.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
 			}
 		};
-		
-		//scene.attachChild(cannon1);
-		
-		cannon1.setPosition(50, 360);		
-		cannon1.setLevel(1);
-		
 		scene.registerTouchArea(bt1);
+		
+		
+		
+		
+		
 		spider1.move(track);	
 		spider1.setPosition(0, 0);		
 		
@@ -113,23 +118,16 @@ public class CdhActivity extends  BaseGame{
 					}
 				});
 		scene.registerUpdateHandler(timer);
-		lm.addTower(cannon1);
-		//Sprite range = new Sprite(500, 500, 90, 90, TM.getTR(Names.range));
-		//scene.attachChild(range);
+		
 		
 		
 		return scene;
 	}
 
 	@Override
-	public void onLoadComplete() {
-		//scene.detachChild(cannon1);
-		//cannon1 = null;
+	public void onLoadComplete() {		
 		
 	}
 	
-	public static void add(IEntity entity)
-	{
-		scene.attachChild(entity);
-	}
+	
 }

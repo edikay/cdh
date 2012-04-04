@@ -49,6 +49,7 @@ public class Tower extends AnimatedSprite {
 		towerMenu = new TowerMenu(this);
 		CdhActivity.scene.attachChild(towerMenu);
 		towerMenu.setVisible(false);
+		
 	}
 
 	public float getRotationAngle(Monster monster) {

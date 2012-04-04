@@ -15,7 +15,7 @@ public class TowerMenu extends Sprite {
 	public TowerMenu(Tower tTower) {
 		super(0, 0, 260, 190, TM.getTR(Names.towermenubg));
 		tower = tTower;
-
+		
 		colors[0] = new AnimatedSprite((0) * 86, 0,
 				TM.getTTR(Names.towermenucolors)) {
 			@Override
@@ -106,7 +106,7 @@ public class TowerMenu extends Sprite {
 
 	@Override
 	public void setVisible(boolean pVisible) {
-		refresh();
+		//refresh();
 		super.setVisible(pVisible);
 	}
 

@@ -11,5 +11,7 @@ public enum Names {
 	rectangl,
 	octopus,
 	towermenubg,
-	towermenucolors
+	towermenucolors,
+	towerspot,
+	towerspotmenu
 }

@@ -71,9 +71,7 @@ public class CdhActivity extends  BaseGame{
 		Walus spider1 = new Walus();
 		final Spider spider2 = new Spider();
 		lm.addMonster(spider1);
-		lm.addMonster(spider2);
-		scene.attachChild(spider1);
-		scene.attachChild(spider2);
+		lm.addMonster(spider2);		
 		Cannon cannon1 = new Cannon();
 		final Track track = new Track();
 		track.setTrack(new WayPoint(220, 0, 180),new WayPoint(220, 600, 90));

@@ -15,50 +15,8 @@ public class TowerMenu extends Sprite {
 	public TowerMenu(Tower tTower) {
 		super(0, 0, 260, 190, TM.getTR(Names.towermenubg));
 		tower = tTower;
-		
-		colors[0] = new AnimatedSprite((0) * 86, 0,
-				TM.getTTR(Names.towermenucolors)) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
-					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				if (tower.getLevel() >= 0) {
-					setTowerLevel(0);
-				}
-				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
-						pTouchAreaLocalY);
-			}
-		};
-
-		colors[1] = new AnimatedSprite((1) * 86, 0,
-				TM.getTTR(Names.towermenucolors)) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
-					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				if (tower.getLevel() >= 1) {
-					setTowerLevel(1);
-				}
-				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
-						pTouchAreaLocalY);
-			}
-		};
-
-		colors[2] = new AnimatedSprite((2) * 86, 0,
-				TM.getTTR(Names.towermenucolors)) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
-					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				if (tower.getLevel() >= 2) {
-					setTowerLevel(2);
-				}
-				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
-						pTouchAreaLocalY);
-			}
-		};
-
-		for (AnimatedSprite as : colors) {
-			this.attachChild(as);
-			CdhActivity.scene.registerTouchArea(as);
-		}		
+		createButtons();
+				
 	}
 
 	void setTowerLevel(int color) {
@@ -108,6 +66,53 @@ public class TowerMenu extends Sprite {
 	public void setVisible(boolean pVisible) {
 		refresh();
 		super.setVisible(pVisible);
+	}
+	
+	private void createButtons()
+	{
+		colors[0] = new AnimatedSprite((0) * 86, 0,
+				TM.getTTR(Names.towermenucolors)) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (tower.getLevel() >= 0) {
+					setTowerLevel(0);
+				}
+				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
+						pTouchAreaLocalY);
+			}
+		};
+
+		colors[1] = new AnimatedSprite((1) * 86, 0,
+				TM.getTTR(Names.towermenucolors)) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (tower.getLevel() >= 1) {
+					setTowerLevel(1);
+				}
+				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
+						pTouchAreaLocalY);
+			}
+		};
+
+		colors[2] = new AnimatedSprite((2) * 86, 0,
+				TM.getTTR(Names.towermenucolors)) {
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				if (tower.getLevel() >= 2) {
+					setTowerLevel(2);
+				}
+				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
+						pTouchAreaLocalY);
+			}
+		};
+
+		for (AnimatedSprite as : colors) {
+			this.attachChild(as);
+			CdhActivity.scene.registerTouchArea(as);
+		}
 	}
 
 }

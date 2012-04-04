@@ -13,5 +13,6 @@ public enum Names {
 	towermenubg,
 	towermenucolors,
 	towerspot,
-	towerspotmenu
+	towerspotmenu,
+	cannonicon
 }

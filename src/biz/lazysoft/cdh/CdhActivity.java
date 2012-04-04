@@ -30,7 +30,7 @@ public class CdhActivity extends  BaseGame{
 
 	private Camera mCamera;
 	public static Scene scene;
-	LevelManager lm;
+	static LevelManager lm;
 
 	
 	@Override
@@ -56,6 +56,9 @@ public class CdhActivity extends  BaseGame{
 		TM.add(Names.bullet, loadTiledTextureRegion("misc/bullets.png", 1024, 1024, 1,3));
 		TM.add(Names.range,loadTextureRegion("misc/range.png", 2048, 1024));
 		TM.add(Names.towermenubg,loadTextureRegion("misc/tower_menu.png", 2048, 1024));
+		TM.add(Names.towerspotmenu,loadTextureRegion("misc/tower_spot_menu.png", 2048, 1024));
+		TM.add(Names.towerspot,loadTiledTextureRegion("misc/tower_spot.png", 1024, 1024,1,1));
+		TM.add(Names.cannonicon,loadTextureRegion("misc/cannon_icon.png", 2048, 1024));
 		TM.add(Names.towermenucolors, loadTiledTextureRegion("misc/tower_menu_elems.png", 1024, 1024, 4,4));
 
 	}
@@ -119,7 +122,9 @@ public class CdhActivity extends  BaseGame{
 				});
 		scene.registerUpdateHandler(timer);
 		
-		
+		TowerSpot towerSpot1 = new TowerSpot();
+		towerSpot1.setPosition(200, 5);
+		lm.addTowerSpot(towerSpot1);
 		
 		return scene;
 	}

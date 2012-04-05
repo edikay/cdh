@@ -12,7 +12,7 @@ public class Bullet extends AnimatedSprite{
 	Colors color;
 	
 	public Bullet(Colors tColor,float tDamage,Monster tTarget) {
-		super(0, 0, TM.getTTR(Names.bullet));
+		super(0, 0, AssetPool.getInstance().getTTR(Names.bullet));
 		damage=tDamage;
 		target=tTarget;
 		color=tColor;

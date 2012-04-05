@@ -9,9 +9,9 @@ public class TowerSpot extends AnimatedSprite{
 
 	TowerSpotMenu towerSpotMenu;
 	public TowerSpot() {
-		super(0, 0,90,90,TM.getTTR(Names.towerspot));	
+		super(0, 0,90,90,AssetPool.getInstance().getTTR(Names.towerspot));	
 		towerSpotMenu = new TowerSpotMenu(this);
-		CdhActivity.scene.attachChild(towerSpotMenu);
+		//CdhActivity.scene.attachChild(towerSpotMenu);
 	}
 	
 	@Override

@@ -1,11 +1,7 @@
 package monsters;
 
-import org.anddev.andengine.opengl.texture.ITexture;
-
-
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
-import biz.lazysoft.cdh.TM;
 
 public class Spider extends Monster{
 

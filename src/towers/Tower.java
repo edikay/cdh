@@ -10,11 +10,11 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.Debug;
 
+import biz.lazysoft.cdh.AssetPool;
 import biz.lazysoft.cdh.Bullet;
 import biz.lazysoft.cdh.CdhActivity;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
-import biz.lazysoft.cdh.TM;
 import biz.lazysoft.cdh.TowerMenu;
 import biz.lazysoft.cdh.Track;
 import biz.lazysoft.cdh.WayPoint;
@@ -37,13 +37,13 @@ public class Tower extends AnimatedSprite {
 	private TowerMenu towerMenu;
 
 	public Tower(Names name, Colors tColor) {
-		super(0, 0, 90, 90, TM.getTTR(name));
+		super(0, 0, 90, 90, AssetPool.getInstance().getTTR(name));
 		rate = new float[3];
 		damage = new float[3];
 		range = new float[3];
 		cost = new float[3];
 		color = tColor;
-		spriteRange = new Sprite(0, 0, TM.getTR(Names.range));
+		spriteRange = new Sprite(0, 0, AssetPool.getInstance().getTR(Names.range));
 		spriteRange.setVisible(false);
 		this.attachChild(spriteRange);
 		towerMenu = new TowerMenu(this);

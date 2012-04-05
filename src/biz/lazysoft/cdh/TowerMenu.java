@@ -4,7 +4,6 @@ import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 
-
 import towers.Tower;
 
 public class TowerMenu extends Sprite {
@@ -13,7 +12,7 @@ public class TowerMenu extends Sprite {
 	AnimatedSprite colors[] = new AnimatedSprite[3];
 
 	public TowerMenu(Tower tTower) {
-		super(0, 0, 260, 190, TM.getTR(Names.towermenubg));
+		super(0, 0, 260, 190, AssetPool.getInstance().getTR(Names.towermenubg));
 		tower = tTower;
 		createButtons();
 				
@@ -71,7 +70,7 @@ public class TowerMenu extends Sprite {
 	private void createButtons()
 	{
 		colors[0] = new AnimatedSprite((0) * 86, 0,
-				TM.getTTR(Names.towermenucolors)) {
+				AssetPool.getInstance().getTTR(Names.towermenucolors)) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -84,7 +83,7 @@ public class TowerMenu extends Sprite {
 		};
 
 		colors[1] = new AnimatedSprite((1) * 86, 0,
-				TM.getTTR(Names.towermenucolors)) {
+				AssetPool.getInstance().getTTR(Names.towermenucolors)) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
@@ -97,7 +96,7 @@ public class TowerMenu extends Sprite {
 		};
 
 		colors[2] = new AnimatedSprite((2) * 86, 0,
-				TM.getTTR(Names.towermenucolors)) {
+				AssetPool.getInstance().getTTR(Names.towermenucolors)) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {

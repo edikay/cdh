@@ -12,14 +12,14 @@ public class TowerSpotMenu extends Sprite{
 	
 	public TowerSpotMenu(TowerSpot tTowerSpot)
 	{
-		super(0, 0, 200, 720, TM.getTR(Names.towerspotmenu));
+		super(0, 0, 200, 720, AssetPool.getInstance().getTR(Names.towerspotmenu));
 		towerSpot = tTowerSpot;
 		createButtons();
 	}
 	
 	private void createButtons()
 	{
-		towers[0] =new Sprite(0, 0, TM.getTR(Names.cannonicon))
+		towers[0] =new Sprite(0, 0, AssetPool.getInstance().getTR(Names.cannonicon))
 		{
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,

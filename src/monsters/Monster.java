@@ -2,9 +2,9 @@ package monsters;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 
+import biz.lazysoft.cdh.AssetPool;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
-import biz.lazysoft.cdh.TM;
 import biz.lazysoft.cdh.Track;
 
 
@@ -16,13 +16,13 @@ public abstract class Monster extends AnimatedSprite {
 	private float power=1;	
 	Colors color;
 	
-	
 	public Monster(Names name,float tSpeed,float tEnergy,float tPower,Colors tColor) {
-		super(0, 0, TM.getTTR(name));		
+		super(0, 0,AssetPool.getInstance().getTTR(name));		
 		speed = tSpeed;
 		energy = tEnergy;
 		power = tPower;		
-		color = tColor;
+		color = tColor;	
+		
 	}
 	
 	public void move(Track tTrack) {

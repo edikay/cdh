@@ -10,7 +10,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.Debug;
 
-import biz.lazysoft.cdh.AssetPool;
+import andengine.AssetPool;
 import biz.lazysoft.cdh.Bullet;
 import biz.lazysoft.cdh.CdhActivity;
 import biz.lazysoft.cdh.Colors;

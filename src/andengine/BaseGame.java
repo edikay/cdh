@@ -1,4 +1,4 @@
-package biz.lazysoft.cdh;
+package andengine;
 
 import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.font.FontManager;

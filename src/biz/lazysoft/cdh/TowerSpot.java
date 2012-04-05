@@ -5,6 +5,8 @@ import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.util.Debug;
 
+import andengine.AssetPool;
+
 public class TowerSpot extends AnimatedSprite{
 
 	TowerSpotMenu towerSpotMenu;

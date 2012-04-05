@@ -20,6 +20,9 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 
+import andengine.AssetPool;
+import andengine.BaseGame;
+
 import towers.Cannon;
 import towers.Tower;
 

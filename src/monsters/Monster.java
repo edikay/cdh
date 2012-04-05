@@ -2,7 +2,7 @@ package monsters;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 
-import biz.lazysoft.cdh.AssetPool;
+import andengine.AssetPool;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.Track;

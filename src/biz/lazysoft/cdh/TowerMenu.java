@@ -4,6 +4,8 @@ import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 
+import andengine.AssetPool;
+
 import towers.Tower;
 
 public class TowerMenu extends Sprite {

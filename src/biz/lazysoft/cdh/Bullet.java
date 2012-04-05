@@ -4,6 +4,8 @@ import monsters.Monster;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 
+import andengine.AssetPool;
+
 public class Bullet extends AnimatedSprite{
 
 	float damage=60;

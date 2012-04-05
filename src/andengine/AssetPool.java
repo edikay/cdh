@@ -1,4 +1,4 @@
-package biz.lazysoft.cdh;
+package andengine;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -16,6 +16,8 @@ import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextur
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.util.Debug;
+
+import biz.lazysoft.cdh.Names;
 
 import android.content.Context;
 import android.graphics.Typeface;

@@ -40,6 +40,7 @@ public class Bullet extends AnimatedSprite{
 	public void hit()
 	{
 		target.hit(damage);
+		CdhActivity.lm.removeObject(this);
 	}
 	
 	public void move(Track tTrack) {

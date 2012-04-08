@@ -29,9 +29,11 @@ public class Tower extends AnimatedSprite {
 
 	private Colors bulletColor = Colors.red;
 
-	private long lastFire;
-	private Sprite spriteRange;
 	private Monster target = null;
+	private long lastFire;
+	
+	private Sprite spriteRange;
+	
 
 	private TowerMenu towerMenu;
 
@@ -41,25 +43,32 @@ public class Tower extends AnimatedSprite {
 		damage = new float[3];
 		range = new float[3];
 		cost = new float[3];
-		color = tColor;
-		spriteRange = new Sprite(0, 0, AssetPool.getInstance().getTR(
-				Names.range));
-		spriteRange.setVisible(false);
-		this.attachChild(spriteRange);
+		color = tColor;		
+		
+		setRange();
+	
 		towerMenu = new TowerMenu(this);
 		CdhActivity.scene.attachChild(towerMenu);
 		towerMenu.setVisible(false);
 
 	}
 
-	public float getRotationAngle(Monster monster) {
-		float x = monster.getX() - getX();
-		float y = monster.getY() - getY();
-		if (x != 0)
-			return (float) Math.toDegrees(Math.atan(y / x)) + 90;
-		return 0;
+	public void setRange()
+	{
+		spriteRange = new Sprite(this.getX(), this.getY(), AssetPool.getInstance().getTR(
+				Names.range));
+		spriteRange.setVisible(false);
+		CdhActivity.lm.addObject(spriteRange);
 	}
-
+	
+	private void showRange() {
+		spriteRange.setSize(getRange() * 2, getRange() * 2);		
+		spriteRange.setPosition((this.getX()+(this.getWidth() / 2))
+				- (spriteRange.getWidth() / 2), (this.getY()+(this.getHeight() / 2))
+				- (spriteRange.getHeight() / 2));
+		spriteRange.setVisible(true);
+	}
+	
 	public float getRate() {
 		return rate[level];
 	}
@@ -96,63 +105,6 @@ public class Tower extends AnimatedSprite {
 		return color;
 	}
 
-	private boolean isInRange(Monster monster) {
-		double xa, xb, ya, yb;
-		xa = this.getX();
-		ya = this.getY();
-		xb = monster.getX();
-		yb = monster.getY();
-		float distance = (float) Math.sqrt(Math.pow((xa - xb), 2)
-				+ Math.pow((ya - yb), 2));
-		if (distance - 15 <= getRange())
-			return true;
-		else
-			return false;
-	}
-
-	public boolean fire(Monster monster) {
-		if (isInRange(monster)) {
-			if (new Date().getTime() - lastFire > getRate()) {
-				lastFire = new Date().getTime();
-
-				WayPoint start = new WayPoint(this.getX()
-						+ (this.getWidth() / 2), this.getY()
-						+ (this.getHeight() / 2), 0);
-				WayPoint end = new WayPoint(monster.getX()
-						+ (monster.getWidth() / 2), monster.getY()
-						+ (monster.getHeight() / 2), 0);
-
-				Track track = new Track();
-				track.setTrack(start, end);
-				Bullet bullet = new Bullet(getBulletColor(), getDamage(),
-						monster);
-				this.getParent().attachChild(bullet);
-				bullet.move(track);
-				this.animate(100, false);
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void checkFire(ArrayList<Monster> monsters) {
-		if (target != null && isInRange(target) == true) {
-			this.setRotation(getRotationAngle(target));
-
-			Debug.d("NAMIERZONY    angel=" + getRotationAngle(target)
-					+ "FIRE: " + fire(target));
-		} else {
-			for (Monster m : monsters) {
-				if (isInRange(m)) {
-					target = m;
-					Debug.d("W ZASIEGU MONSTER");
-					break;
-
-				}
-			}
-		}
-	}
-
 	public void setLevel(int tLevel) {
 		level = tLevel;
 	}
@@ -161,14 +113,7 @@ public class Tower extends AnimatedSprite {
 		return level;
 	}
 
-	private void setSpriteRange() {
-		spriteRange.setSize(getRange() * 2, getRange() * 2);
-		spriteRange.setPosition((this.getWidth() / 2)
-				- (spriteRange.getWidth() / 2), (this.getHeight() / 2)
-				- (spriteRange.getHeight() / 2));
-		spriteRange.setVisible(true);
-
-	}
+	
 
 	public void showTowerMenu() {
 		float tX = 0;
@@ -187,7 +132,7 @@ public class Tower extends AnimatedSprite {
 		towerMenu.setPosition(tX, tY);
 		towerMenu.setVisible(true);
 
-		setSpriteRange();
+		showRange();
 
 	}
 
@@ -199,6 +144,7 @@ public class Tower extends AnimatedSprite {
 	@Override
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
+		Debug.d("CLICK ON TOWER");
 		if (towerMenu.isVisible())
 			hideTowerMenu();
 		else
@@ -206,6 +152,8 @@ public class Tower extends AnimatedSprite {
 		return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 				pTouchAreaLocalY);
 	}
+	
+	//Metody obslugujace namierzenie Monstera i strzelanie
 
 	public void work(ArrayList<Monster> monsters) {
 		checkTarget();
@@ -215,15 +163,15 @@ public class Tower extends AnimatedSprite {
 
 	}
 
-	public void checkTarget() {
+	private void checkTarget() {
 		if (target != null) {
-			if (!isInRange(target) || target.isAlive()==false) {
+			if (!isInRange(target) || target.isAlive() == false) {
 				target = null;
 			}
 		}
 	}
 
-	public void findTarget(ArrayList<Monster> monsters) {
+	private void findTarget(ArrayList<Monster> monsters) {
 		if (target == null) {
 			for (Monster m : monsters) {
 				if (isInRange(m)) {
@@ -235,13 +183,13 @@ public class Tower extends AnimatedSprite {
 		}
 	}
 
-	public void rotate() {
+	private void rotate() {
 		if (target != null) {
 			this.setRotation(getRotationAngle(target));
 		}
 	}
 
-	public void shoot() {
+	private void shoot() {
 		if (target != null) {
 			if (new Date().getTime() - lastFire > getRate()) {
 				lastFire = new Date().getTime();
@@ -257,11 +205,33 @@ public class Tower extends AnimatedSprite {
 				track.setTrack(start, end);
 				Bullet bullet = new Bullet(getBulletColor(), getDamage(),
 						target);
-				CdhActivity.lm.addBullet(bullet);
+				CdhActivity.lm.addObject(bullet);
 				bullet.move(track);
 				this.animate(100, false);
 			}
 		}
+	}
+
+	private float getRotationAngle(Monster monster) {
+		float x = monster.getX() - getX();
+		float y = monster.getY() - getY();
+		if (x != 0)
+			return (float) Math.toDegrees(Math.atan(y / x)) + 90;
+		return 0;
+	}
+
+	private boolean isInRange(Monster monster) {
+		double xa, xb, ya, yb;
+		xa = this.getX();
+		ya = this.getY();
+		xb = monster.getX();
+		yb = monster.getY();
+		float distance = (float) Math.sqrt(Math.pow((xa - xb), 2)
+				+ Math.pow((ya - yb), 2));
+		if (distance - 15 <= getRange())
+			return true;
+		else
+			return false;
 	}
 
 }

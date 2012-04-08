@@ -1,8 +1,5 @@
 package biz.lazysoft.cdh;
 
-import java.util.ArrayList;
-
-
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
@@ -10,16 +7,16 @@ import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
-import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
+import org.anddev.andengine.util.Debug;
 
 import biz.lazysoft.cdh.andengine.AssetPool;
 import biz.lazysoft.cdh.andengine.BaseGame;
-import biz.lazysoft.cdh.monsters.Monster;
+import biz.lazysoft.cdh.monsters.Rectangl;
 import biz.lazysoft.cdh.monsters.Spider;
 import biz.lazysoft.cdh.monsters.Walus;
 import biz.lazysoft.cdh.towers.Cannon;
@@ -57,7 +54,7 @@ public class CdhActivity extends  BaseGame{
 		// Tiled
 		pool.loadTiledTextureRegion(Names.walus, "monsters/walus_tiled.png", 512, 512, 1, 4);
 		pool.loadTiledTextureRegion(Names.spider, "monsters/spider_tiled.png", 1024, 1024,1,4);		
-		pool.loadTiledTextureRegion(Names.spider,"monsters/rectangl_tiled.png", 1024, 1024,1,4);
+		pool.loadTiledTextureRegion(Names.rectangl,"monsters/rectangl_tiled.png", 1024, 1024,1,4);
 		pool.loadTiledTextureRegion(Names.octopus,"monsters/octopus_tiled.png", 1024, 1024,1,4);		
 		pool.loadTiledTextureRegion(Names.cannon,"towers/cannon.png", 1024, 1024, 1,2);
 		pool.loadTiledTextureRegion(Names.bullet,"misc/bullets.png", 1024, 1024, 1,3);		
@@ -81,13 +78,28 @@ public class CdhActivity extends  BaseGame{
 		AssetPool pool = AssetPool.getInstance();
 		scene = new Scene();
 		lm = new LevelManager(scene);
-		Sprite background = new Sprite(0, 0, pool.getTR(Names.map0));
+		
+		Sprite background = new Sprite(0, 0, pool.getTR(Names.map0))
+		{
+			@Override
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+					float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				Debug.d("CLICK ON background");
+				/*for(Tower tower : lm.getTowers())
+				{
+					tower.hideTowerMenu();
+				}*/
+				return super
+						.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
+			}
+		};
+		scene.registerTouchArea(background);
 		scene.attachChild(background);
 		
 		Walus spider1 = new Walus();
-		//final Spider spider2 = new Spider();
+		final Rectangl spider2 = new Rectangl();
 		lm.addMonster(spider1);
-		//lm.addMonster(spider2);		
+		lm.addMonster(spider2);		
 		
 		Cannon cannon1 = new Cannon();
 		cannon1.setPosition(50, 360);		
@@ -102,7 +114,7 @@ public class CdhActivity extends  BaseGame{
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				//spider2.move(track);
+				spider2.move(track);
 				return super
 						.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
 			}

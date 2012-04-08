@@ -2,6 +2,7 @@ package biz.lazysoft.cdh;
 
 import java.util.ArrayList;
 
+import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 
@@ -80,16 +81,16 @@ public class LevelManager {
 		scene.unregisterTouchArea(tButton);
 	}
 	
-	// Bullets
+	// Objects
 	
-	public void addBullet(Bullet tBullet)
+	public void addObject(IEntity tEntity)
 	{
-		scene.attachChild(tBullet);
+		scene.attachChild(tEntity);
 	}
 	
-	public void removeBullet(Bullet tBullet)
+	public void removeObject(IEntity tEntity)
 	{
-		scene.detachChild(tBullet);
+		scene.detachChild(tEntity);
 	}
 	
 	

@@ -89,8 +89,7 @@ public class Track {
 					public void onPathFinished(
 							final PathModifier pPathModifier,
 							final IEntity pEntity) {
-						bullet.hit();
-						bullet.setVisible(false);
+						bullet.hit();						
 						Debug.d("BULLET STOP");
 							
 						

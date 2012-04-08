@@ -2,9 +2,6 @@ package biz.lazysoft.cdh;
 
 import java.util.ArrayList;
 
-import monsters.Monster;
-import monsters.Spider;
-import monsters.Walus;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
@@ -20,11 +17,15 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 
-import andengine.AssetPool;
-import andengine.BaseGame;
+import biz.lazysoft.cdh.andengine.AssetPool;
+import biz.lazysoft.cdh.andengine.BaseGame;
+import biz.lazysoft.cdh.monsters.Monster;
+import biz.lazysoft.cdh.monsters.Spider;
+import biz.lazysoft.cdh.monsters.Walus;
+import biz.lazysoft.cdh.towers.Cannon;
+import biz.lazysoft.cdh.towers.Tower;
 
-import towers.Cannon;
-import towers.Tower;
+
 
 public class CdhActivity extends  BaseGame{
    

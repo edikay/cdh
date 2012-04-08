@@ -1,4 +1,4 @@
-package andengine;
+package biz.lazysoft.cdh.andengine;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -84,7 +84,7 @@ public class AssetPool {
 	}
 	
 	public TextureRegion getTR(Names key) {
-		return images.get(key);
+		return images.get(key).deepCopy();
 	}
 	
 	//
@@ -102,7 +102,7 @@ public class AssetPool {
 	}
 	
 	public TiledTextureRegion getTTR(Names key) {
-		return tiles.get(key);
+		return tiles.get(key).deepCopy();
 	}
 	
 	//

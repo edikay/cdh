@@ -1,4 +1,4 @@
-package monsters;
+package biz.lazysoft.cdh.monsters;
 
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;

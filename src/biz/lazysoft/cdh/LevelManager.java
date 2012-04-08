@@ -2,12 +2,13 @@ package biz.lazysoft.cdh;
 
 import java.util.ArrayList;
 
-import monsters.Monster;
 
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 
-import towers.Tower;
+import biz.lazysoft.cdh.monsters.Monster;
+import biz.lazysoft.cdh.towers.Tower;
+
 
 public class LevelManager {
 

@@ -1,6 +1,5 @@
 package biz.lazysoft.cdh;
 
-import monsters.Monster;
 
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.modifier.PathModifier;
@@ -8,7 +7,9 @@ import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
 import org.anddev.andengine.util.Debug;
 
-import towers.Tower;
+import biz.lazysoft.cdh.monsters.Monster;
+import biz.lazysoft.cdh.towers.Tower;
+
 
 public class Track {
 

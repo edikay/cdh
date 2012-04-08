@@ -1,10 +1,11 @@
 package biz.lazysoft.cdh;
 
-import monsters.Monster;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 
-import andengine.AssetPool;
+import biz.lazysoft.cdh.andengine.AssetPool;
+import biz.lazysoft.cdh.monsters.Monster;
+
 
 public class Bullet extends AnimatedSprite{
 

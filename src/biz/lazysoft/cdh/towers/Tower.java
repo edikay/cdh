@@ -1,16 +1,14 @@
-package towers;
+package biz.lazysoft.cdh.towers;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-import monsters.Monster;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.Debug;
 
-import andengine.AssetPool;
 import biz.lazysoft.cdh.Bullet;
 import biz.lazysoft.cdh.CdhActivity;
 import biz.lazysoft.cdh.Colors;
@@ -18,6 +16,8 @@ import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.TowerMenu;
 import biz.lazysoft.cdh.Track;
 import biz.lazysoft.cdh.WayPoint;
+import biz.lazysoft.cdh.andengine.AssetPool;
+import biz.lazysoft.cdh.monsters.Monster;
 
 public class Tower extends AnimatedSprite {
 

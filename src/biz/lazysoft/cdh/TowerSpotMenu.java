@@ -5,7 +5,8 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.Debug;
 
-import andengine.AssetPool;
+import biz.lazysoft.cdh.andengine.AssetPool;
+
 
 public class TowerSpotMenu extends Sprite{
 	

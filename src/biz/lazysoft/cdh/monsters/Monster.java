@@ -1,11 +1,11 @@
-package monsters;
+package biz.lazysoft.cdh.monsters;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 
-import andengine.AssetPool;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.Track;
+import biz.lazysoft.cdh.andengine.AssetPool;
 
 
 

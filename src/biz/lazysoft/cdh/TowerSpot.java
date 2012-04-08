@@ -5,7 +5,8 @@ import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.util.Debug;
 
-import andengine.AssetPool;
+import biz.lazysoft.cdh.andengine.AssetPool;
+
 
 public class TowerSpot extends AnimatedSprite{
 

@@ -3,7 +3,6 @@ package biz.lazysoft.cdh.towers;
 import java.util.ArrayList;
 import java.util.Date;
 
-
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
@@ -43,13 +42,14 @@ public class Tower extends AnimatedSprite {
 		range = new float[3];
 		cost = new float[3];
 		color = tColor;
-		spriteRange = new Sprite(0, 0, AssetPool.getInstance().getTR(Names.range));
+		spriteRange = new Sprite(0, 0, AssetPool.getInstance().getTR(
+				Names.range));
 		spriteRange.setVisible(false);
 		this.attachChild(spriteRange);
 		towerMenu = new TowerMenu(this);
 		CdhActivity.scene.attachChild(towerMenu);
 		towerMenu.setVisible(false);
-		
+
 	}
 
 	public float getRotationAngle(Monster monster) {
@@ -65,16 +65,13 @@ public class Tower extends AnimatedSprite {
 	}
 
 	public float getDamage() {
-		
-		if (color == bulletColor)
-		{
-			Debug.d("Damage = "+damage[level] * (1 + (getLevel() + 1) * 0.1f));
+
+		if (color == bulletColor) {
+			Debug.d("Damage = " + damage[level] * (1 + (getLevel() + 1) * 0.1f));
 			return damage[level] * (1 + (getLevel() + 1) * 0.1f);
-			
-		}
-		else
-		{
-			Debug.d("Damage = "+damage[level]);
+
+		} else {
+			Debug.d("Damage = " + damage[level]);
 			return damage[level];
 		}
 	}
@@ -163,7 +160,7 @@ public class Tower extends AnimatedSprite {
 	public int getLevel() {
 		return level;
 	}
-	
+
 	private void setSpriteRange() {
 		spriteRange.setSize(getRange() * 2, getRange() * 2);
 		spriteRange.setPosition((this.getWidth() / 2)
@@ -189,9 +186,9 @@ public class Tower extends AnimatedSprite {
 
 		towerMenu.setPosition(tX, tY);
 		towerMenu.setVisible(true);
-		
+
 		setSpriteRange();
-		
+
 	}
 
 	public void hideTowerMenu() {
@@ -208,6 +205,63 @@ public class Tower extends AnimatedSprite {
 			showTowerMenu();
 		return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 				pTouchAreaLocalY);
+	}
+
+	public void work(ArrayList<Monster> monsters) {
+		checkTarget();
+		findTarget(monsters);
+		rotate();
+		shoot();
+
+	}
+
+	public void checkTarget() {
+		if (target != null) {
+			if (!isInRange(target) || target.isAlive()==false) {
+				target = null;
+			}
+		}
+	}
+
+	public void findTarget(ArrayList<Monster> monsters) {
+		if (target == null) {
+			for (Monster m : monsters) {
+				if (isInRange(m)) {
+					target = m;
+					Debug.d("W ZASIEGU MONSTER");
+					break;
+				}
+			}
+		}
+	}
+
+	public void rotate() {
+		if (target != null) {
+			this.setRotation(getRotationAngle(target));
+		}
+	}
+
+	public void shoot() {
+		if (target != null) {
+			if (new Date().getTime() - lastFire > getRate()) {
+				lastFire = new Date().getTime();
+
+				WayPoint start = new WayPoint(this.getX()
+						+ (this.getWidth() / 2), this.getY()
+						+ (this.getHeight() / 2), 0);
+				WayPoint end = new WayPoint(target.getX()
+						+ (target.getWidth() / 2), target.getY()
+						+ (target.getHeight() / 2), 0);
+
+				Track track = new Track();
+				track.setTrack(start, end);
+				Bullet bullet = new Bullet(getBulletColor(), getDamage(),
+						target);
+				CdhActivity.lm.addBullet(bullet);
+				bullet.move(track);
+				this.animate(100, false);
+			}
+		}
 	}
 
 }

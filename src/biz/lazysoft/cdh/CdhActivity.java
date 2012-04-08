@@ -34,7 +34,7 @@ public class CdhActivity extends  BaseGame{
 
 	private Camera mCamera;
 	public static Scene scene;
-	static LevelManager lm;
+	public static LevelManager lm;
 
 	
 	@Override
@@ -126,7 +126,8 @@ public class CdhActivity extends  BaseGame{
 					
 						for(Tower tower:lm.getTowers())
 						{
-							tower.checkFire(lm.getMonsters());
+							//tower.checkFire(lm.getMonsters());
+							tower.work(lm.getMonsters());
 						}
 						
 

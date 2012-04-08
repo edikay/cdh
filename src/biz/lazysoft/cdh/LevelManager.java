@@ -2,92 +2,95 @@ package biz.lazysoft.cdh;
 
 import java.util.ArrayList;
 
-
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 
 import biz.lazysoft.cdh.monsters.Monster;
 import biz.lazysoft.cdh.towers.Tower;
 
-
 public class LevelManager {
 
 	Scene scene;
-	
+
 	ArrayList<Monster> monsters = new ArrayList<Monster>();
 	ArrayList<Tower> towers = new ArrayList<Tower>();
 	ArrayList<TowerSpot> towerSpots = new ArrayList<TowerSpot>();
-	
-	
-	
-	LevelManager(Scene tScene)
-	{
-		scene=tScene;
+
+	LevelManager(Scene tScene) {
+		scene = tScene;
 	}
-	
-	//Monster
-	
-	public void addMonster(Monster tMonster)
-	{
-		scene.attachChild(tMonster);			
+
+	// Monster
+
+	public void addMonster(Monster tMonster) {
+		scene.attachChild(tMonster);
 		monsters.add(tMonster);
 	}
-	
-	public ArrayList<Monster> getMonsters()
-	{
+
+	public ArrayList<Monster> getMonsters() {
 		return monsters;
 	}
-	
-	public void removeMonster(Monster tMonster)
-	{
+
+	public void removeMonster(Monster tMonster) {
 		scene.detachChild(tMonster);
 		monsters.remove(tMonster);
 	}
-	
-	//Tower
-	
-	public void addTower(Tower tTower)
-	{
+
+	// Tower
+
+	public void addTower(Tower tTower) {
 		scene.attachChild(tTower);
-		scene.registerTouchArea(tTower);	
+		scene.registerTouchArea(tTower);
 		towers.add(tTower);
 	}
-	
-	public ArrayList<Tower> getTowers()
-	{
+
+	public ArrayList<Tower> getTowers() {
 		return towers;
 	}
-	
-	public void removeTower(Tower tTower)
-	{
+
+	public void removeTower(Tower tTower) {
 		scene.detachChild(tTower);
 		towers.remove(tTower);
 	}
+
+	// Tower spot
+
+	public void addTowerSpot(TowerSpot tTowerSpot) {
+		scene.attachChild(tTowerSpot);
+		scene.registerTouchArea(tTowerSpot);
+		towerSpots.add(tTowerSpot);
+	}
+
+	public ArrayList<TowerSpot> getTowerSpots() {
+		return towerSpots;
+	}
+
+	public void removeTowerSpot(TowerSpot tTowerSpot) {
+		scene.detachChild(tTowerSpot);
+		towerSpots.remove(tTowerSpot);
+	}
+
+	// Buttons
+
+	public void addButton(ITouchArea tButton) {
+		scene.registerTouchArea(tButton);
+	}
 	
-	//Tower spot
+	public void removeButton(ITouchArea tButton) {
+		scene.unregisterTouchArea(tButton);
+	}
 	
-		public void addTowerSpot(TowerSpot tTowerSpot)
-		{
-			scene.attachChild(tTowerSpot);
-			scene.registerTouchArea(tTowerSpot);	
-			towerSpots.add(tTowerSpot);
-		}
-		
-		public ArrayList<TowerSpot> getTowerSpots()
-		{
-			return towerSpots;
-		}
-		
-		public void removeTowerSpot(TowerSpot tTowerSpot)
-		{
-			scene.detachChild(tTowerSpot);
-			towerSpots.remove(tTowerSpot);
-		}
-		
-	//Buttons
-		
-		public void addButton(ITouchArea tButton)
-		{
-			scene.registerTouchArea(tButton);
-		}
+	// Bullets
+	
+	public void addBullet(Bullet tBullet)
+	{
+		scene.attachChild(tBullet);
+	}
+	
+	public void removeBullet(Bullet tBullet)
+	{
+		scene.detachChild(tBullet);
+	}
+	
+	
 }

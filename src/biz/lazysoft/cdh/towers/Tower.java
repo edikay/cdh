@@ -145,6 +145,7 @@ public class Tower extends AnimatedSprite {
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
 		Debug.d("CLICK ON TOWER");
+		if(pSceneTouchEvent.isActionOutside())Debug.d("CLICK ON OUTSIDE");
 		if (towerMenu.isVisible())
 			hideTowerMenu();
 		else

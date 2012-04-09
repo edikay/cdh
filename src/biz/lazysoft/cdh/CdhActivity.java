@@ -60,6 +60,9 @@ public class CdhActivity extends  BaseGame{
 		pool.loadTiledTextureRegion(Names.bullet,"misc/bullets.png", 1024, 1024, 1,3);		
 		pool.loadTiledTextureRegion(Names.towerspot,"misc/tower_spot.png", 1024, 1024,1,1);		
 		pool.loadTiledTextureRegion(Names.towermenucolors,"misc/tower_menu_elems.png", 1024, 1024, 4,4);
+		pool.loadTiledTextureRegion(Names.el1,"misc/bullet_red.png", 1024, 1024, 1,3);
+		pool.loadTiledTextureRegion(Names.el2,"misc/bullet_purple.png", 1024, 1024, 1,3);
+		pool.loadTiledTextureRegion(Names.el3,"misc/bullet_blue.png", 1024, 1024, 1,3);
 
 		// Image
 		pool.loadTextureRegion(Names.map0,"levels/level1map.png", 2048, 1024);

@@ -8,17 +8,19 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.Debug;
 
+import android.graphics.PointF;
 import biz.lazysoft.cdh.Bullet;
 import biz.lazysoft.cdh.CdhActivity;
 import biz.lazysoft.cdh.Colors;
+import biz.lazysoft.cdh.Menu;
+import biz.lazysoft.cdh.MenuListener;
 import biz.lazysoft.cdh.Names;
-import biz.lazysoft.cdh.TowerMenu;
 import biz.lazysoft.cdh.Track;
 import biz.lazysoft.cdh.WayPoint;
 import biz.lazysoft.cdh.andengine.AssetPool;
 import biz.lazysoft.cdh.monsters.Monster;
 
-public class Tower extends AnimatedSprite {
+public class Tower extends AnimatedSprite implements MenuListener {
 
 	float[] rate;
 	float[] damage;
@@ -31,11 +33,10 @@ public class Tower extends AnimatedSprite {
 
 	private Monster target = null;
 	private long lastFire;
-	
-	private Sprite spriteRange;
-	
 
-	private TowerMenu towerMenu;
+	private Sprite spriteRange;
+
+	Menu menu;
 
 	public Tower(Names name, Colors tColor) {
 		super(0, 0, 90, 90, AssetPool.getInstance().getTTR(name));
@@ -43,32 +44,34 @@ public class Tower extends AnimatedSprite {
 		damage = new float[3];
 		range = new float[3];
 		cost = new float[3];
-		color = tColor;		
-		
+		color = tColor;
+
 		setRange();
-	
-		towerMenu = new TowerMenu(this);
-		CdhActivity.scene.attachChild(towerMenu);
-		towerMenu.setVisible(false);
+
+		menu = new Menu(this, Names.towermenubg);
+		menu.addMenuItem(0, 0, 0, Names.el1);
+		menu.addMenuItem(80, 0, 1, Names.el2);
+		menu.addMenuItem(160, 0, 2, Names.el3);
 
 	}
 
-	public void setRange()
-	{
-		spriteRange = new Sprite(this.getX(), this.getY(), AssetPool.getInstance().getTR(
-				Names.range));
+	public void setRange() {
+		spriteRange = new Sprite(this.getX(), this.getY(), AssetPool
+				.getInstance().getTR(Names.range));
 		spriteRange.setVisible(false);
 		CdhActivity.lm.addObject(spriteRange);
 	}
-	
+
 	private void showRange() {
-		spriteRange.setSize(getRange() * 2, getRange() * 2);		
-		spriteRange.setPosition((this.getX()+(this.getWidth() / 2))
-				- (spriteRange.getWidth() / 2), (this.getY()+(this.getHeight() / 2))
-				- (spriteRange.getHeight() / 2));
+		spriteRange.setSize(getRange() * 2, getRange() * 2);
+		spriteRange.setPosition(
+				(this.getX() + (this.getWidth() / 2))
+						- (spriteRange.getWidth() / 2),
+				(this.getY() + (this.getHeight() / 2))
+						- (spriteRange.getHeight() / 2));
 		spriteRange.setVisible(true);
 	}
-	
+
 	public float getRate() {
 		return rate[level];
 	}
@@ -113,31 +116,15 @@ public class Tower extends AnimatedSprite {
 		return level;
 	}
 
-	
-
 	public void showTowerMenu() {
-		float tX = 0;
-		float tY = 0;
 
-		if (this.getX() - towerMenu.getWidth() >= 0)
-			tX = this.getX() - towerMenu.getWidth();
-		else
-			tX = this.getX() + this.getWidth();
-
-		if ((this.getY() + this.getHeight()) - towerMenu.getHeight() >= 0)
-			tY = (this.getY() + this.getHeight()) - towerMenu.getHeight();
-		else
-			tY = this.getY();
-
-		towerMenu.setPosition(tX, tY);
-		towerMenu.setVisible(true);
-
+		menu.showMenu();
 		showRange();
 
 	}
 
 	public void hideTowerMenu() {
-		towerMenu.setVisible(false);
+		menu.hideMenu();
 		spriteRange.setVisible(false);
 	}
 
@@ -145,16 +132,15 @@ public class Tower extends AnimatedSprite {
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
 		Debug.d("CLICK ON TOWER");
-		if(pSceneTouchEvent.isActionOutside())Debug.d("CLICK ON OUTSIDE");
-		if (towerMenu.isVisible())
+		if (menu.isVisible())
 			hideTowerMenu();
 		else
 			showTowerMenu();
 		return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 				pTouchAreaLocalY);
 	}
-	
-	//Metody obslugujace namierzenie Monstera i strzelanie
+
+	// Metody obslugujace namierzenie Monstera i strzelanie
 
 	public void work(ArrayList<Monster> monsters) {
 		checkTarget();
@@ -233,6 +219,72 @@ public class Tower extends AnimatedSprite {
 			return true;
 		else
 			return false;
+	}
+	
+	//Metody interfejsu MenuListener
+
+	@Override
+	public void action(int index) {
+
+		switch (index) {
+		case 0:
+			bulletColor = Colors.red;
+			break;
+		case 1:
+			bulletColor = Colors.purple;
+			break;
+		case 2:
+			bulletColor = Colors.blue;
+			break;
+		}
+		menu.hideMenu();
+
+	}
+
+	@Override
+	public int[] getItemsStatus() {
+		int[] status = new int[3];
+		switch (level) {
+		case 0:
+			status[0] = 1;
+			status[1] = 2;
+			status[2] = 2;
+			break;
+		case 1:
+			status[0] = 1;
+			status[1] = 1;
+			status[2] = 2;
+			break;
+		case 2:
+			status[0] = 1;
+			status[1] = 1;
+			status[2] = 1;
+			break;
+		}
+		if (bulletColor == Colors.red)
+			status[0] = 0;
+		else if (bulletColor == Colors.purple)
+			status[1] = 0;
+		else if (bulletColor == Colors.blue)
+			status[2] = 0;
+		return status;
+	}
+
+	@Override
+	public PointF getPosition() {
+		float tX = 0;
+		float tY = 0;
+
+		if (this.getX() - menu.getWidth() >= 0)
+			tX = this.getX() - menu.getWidth();
+		else
+			tX = this.getX() + this.getWidth();
+
+		if ((this.getY() + this.getHeight()) - menu.getHeight() >= 0)
+			tY = (this.getY() + this.getHeight()) - menu.getHeight();
+		else
+			tY = this.getY();
+		return new PointF(tX, tY);
 	}
 
 }

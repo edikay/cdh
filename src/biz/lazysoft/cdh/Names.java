@@ -14,5 +14,8 @@ public enum Names {
 	towermenucolors,
 	towerspot,
 	towerspotmenu,
-	cannonicon
+	cannonicon,
+	el1,
+	el2,
+	el3
 }

@@ -15,6 +15,7 @@ public enum Names {
 	towerspot,
 	towerspotmenu,
 	cannonicon,
+	closeicon,
 	el1,
 	el2,
 	el3

@@ -1,6 +1,7 @@
 package biz.lazysoft.cdh.monsters;
 
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
+import org.anddev.andengine.util.Debug;
 
 import biz.lazysoft.cdh.CdhActivity;
 import biz.lazysoft.cdh.Colors;
@@ -48,10 +49,13 @@ public abstract class Monster extends AnimatedSprite {
 	}
 
 	public void hit(float damage) {
-		energy -= damage;
-		if (energy <= 0) {
-			CdhActivity.lm.removeMonster(this);
-			this.alive=false;
+		if (alive == true) {
+			energy -= damage;
+			Debug.d("Monster energy = "+energy);
+			if (energy <= 0) {
+				CdhActivity.lm.removeMonster(this);
+				this.alive = false;
+			}
 		}
 	}
 

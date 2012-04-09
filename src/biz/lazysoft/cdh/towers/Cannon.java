@@ -2,13 +2,14 @@ package biz.lazysoft.cdh.towers;
 
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
+import biz.lazysoft.cdh.TowerSpot;
 
 
 
 public class Cannon extends Tower{
 
-	public Cannon() {
-		super(Names.cannon,Colors.red);
+	public Cannon(TowerSpot tTowerSpot) {
+		super(Names.cannon,Colors.red,tTowerSpot);
 		rate[0] = 1500;
 		rate[1] = 1250;
 		rate[2] = 1000;

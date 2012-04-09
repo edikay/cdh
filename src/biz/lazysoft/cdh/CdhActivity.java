@@ -63,11 +63,12 @@ public class CdhActivity extends  BaseGame{
 		pool.loadTiledTextureRegion(Names.el1,"misc/bullet_red.png", 1024, 1024, 1,3);
 		pool.loadTiledTextureRegion(Names.el2,"misc/bullet_purple.png", 1024, 1024, 1,3);
 		pool.loadTiledTextureRegion(Names.el3,"misc/bullet_blue.png", 1024, 1024, 1,3);
+		pool.loadTiledTextureRegion(Names.closeicon,"misc/close_icon.png", 2048, 1024,1,3);
+		pool.loadTiledTextureRegion(Names.cannonicon,"misc/cannon_icon.png", 2048, 1024,1,3);
 
 		// Image
 		pool.loadTextureRegion(Names.map0,"levels/level1map.png", 2048, 1024);
-		pool.loadTextureRegion(Names.range,"misc/range.png", 2048, 1024);
-		pool.loadTextureRegion(Names.cannonicon,"misc/cannon_icon.png", 2048, 1024);
+		pool.loadTextureRegion(Names.range,"misc/range.png", 2048, 1024);		
 		pool.loadTextureRegion(Names.towerspotmenu,"misc/tower_spot_menu.png", 2048, 1024);
 		pool.loadTextureRegion(Names.towermenubg,"misc/tower_menu.png", 2048, 1024);
 
@@ -87,7 +88,7 @@ public class CdhActivity extends  BaseGame{
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				Debug.d("CLICK ON background");
+				Debug.d("Towers size = "+lm.getTowers().size());
 				/*for(Tower tower : lm.getTowers())
 				{
 					tower.hideTowerMenu();
@@ -104,10 +105,10 @@ public class CdhActivity extends  BaseGame{
 		lm.addMonster(spider1);
 		lm.addMonster(spider2);		
 		
-		Cannon cannon1 = new Cannon();
+		/*Cannon cannon1 = new Cannon();
 		cannon1.setPosition(50, 360);		
 		cannon1.setLevel(1);
-		lm.addTower(cannon1);
+		lm.addTower(cannon1);*/
 		
 		final Track track = new Track();
 		track.setTrack(new WayPoint(220, 0, 180),new WayPoint(220, 600, 90));
@@ -141,9 +142,10 @@ public class CdhActivity extends  BaseGame{
 					
 						for(Tower tower:lm.getTowers())
 						{
-							//tower.checkFire(lm.getMonsters());
 							tower.work(lm.getMonsters());
 						}
+						
+						
 						
 
 					}
@@ -151,8 +153,12 @@ public class CdhActivity extends  BaseGame{
 		scene.registerUpdateHandler(timer);
 		
 		TowerSpot towerSpot1 = new TowerSpot();
-		towerSpot1.setPosition(200, 5);
+		towerSpot1.setPosition(50, 360);
+		TowerSpot towerSpot2 = new TowerSpot();
+		towerSpot2.setPosition(50, 270);
 		lm.addTowerSpot(towerSpot1);
+		lm.addTowerSpot(towerSpot2);
+		
 		
 		return scene;
 	}

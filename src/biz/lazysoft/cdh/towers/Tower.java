@@ -15,12 +15,13 @@ import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Menu;
 import biz.lazysoft.cdh.MenuListener;
 import biz.lazysoft.cdh.Names;
+import biz.lazysoft.cdh.TowerSpot;
 import biz.lazysoft.cdh.Track;
 import biz.lazysoft.cdh.WayPoint;
 import biz.lazysoft.cdh.andengine.AssetPool;
 import biz.lazysoft.cdh.monsters.Monster;
 
-public class Tower extends AnimatedSprite implements MenuListener {
+public abstract class Tower extends AnimatedSprite implements MenuListener {
 
 	float[] rate;
 	float[] damage;
@@ -35,17 +36,20 @@ public class Tower extends AnimatedSprite implements MenuListener {
 	private long lastFire;
 
 	private Sprite spriteRange;
+	
+	private TowerSpot towerSpot;
 
 	Menu menu;
 
-	public Tower(Names name, Colors tColor) {
+	public Tower(Names name, Colors tColor,TowerSpot tTowerSpot) {
 		super(0, 0, 90, 90, AssetPool.getInstance().getTTR(name));
 		rate = new float[3];
 		damage = new float[3];
 		range = new float[3];
 		cost = new float[3];
 		color = tColor;
-
+		
+		towerSpot = tTowerSpot;
 		setRange();
 
 		menu = new Menu(this, Names.towermenubg);
@@ -117,10 +121,8 @@ public class Tower extends AnimatedSprite implements MenuListener {
 	}
 
 	public void showTowerMenu() {
-
 		menu.showMenu();
 		showRange();
-
 	}
 
 	public void hideTowerMenu() {
@@ -191,8 +193,7 @@ public class Tower extends AnimatedSprite implements MenuListener {
 				Track track = new Track();
 				track.setTrack(start, end);
 				Bullet bullet = new Bullet(getBulletColor(), getDamage(),
-						target);
-				CdhActivity.lm.addObject(bullet);
+						target);				
 				bullet.move(track);
 				this.animate(100, false);
 			}
@@ -225,7 +226,6 @@ public class Tower extends AnimatedSprite implements MenuListener {
 
 	@Override
 	public void action(int index) {
-
 		switch (index) {
 		case 0:
 			bulletColor = Colors.red;
@@ -237,8 +237,7 @@ public class Tower extends AnimatedSprite implements MenuListener {
 			bulletColor = Colors.blue;
 			break;
 		}
-		menu.hideMenu();
-
+		hideTowerMenu();
 	}
 
 	@Override
@@ -286,5 +285,6 @@ public class Tower extends AnimatedSprite implements MenuListener {
 			tY = this.getY();
 		return new PointF(tX, tY);
 	}
+
 
 }

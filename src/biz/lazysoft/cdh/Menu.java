@@ -2,7 +2,9 @@ package biz.lazysoft.cdh;
 
 import java.util.ArrayList;
 
+import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
+import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.Debug;
 
 import android.graphics.PointF;
@@ -13,7 +15,7 @@ public class Menu extends Sprite {
 	MenuListener menuListner;
 	ArrayList<MenuItem> menuItems;
 
-	public Menu(MenuListener tMenuListener,Names tName) {
+	public Menu(MenuListener tMenuListener, Names tName) {
 		super(0, 0, AssetPool.getInstance().getTR(tName));
 		this.setVisible(false);
 		CdhActivity.lm.addObject(this);
@@ -22,36 +24,64 @@ public class Menu extends Sprite {
 	}
 
 	public void work(int index) {
+		Debug.d("TowerSpot work " + this.toString());
 		menuListner.action(index);
 	}
-	
-	public void showMenu()
-	{
+
+	public void showMenu() {
+		
 		PointF point = menuListner.getPosition();
-		setPosition(point.x,point.y);
+		setPosition(point.x, point.y);
 		this.setVisible(true);
 		int status[] = menuListner.getItemsStatus();
-		for(int i=0;i<status.length;i++)
-		{
+		for (int i = 0; i < status.length; i++) {
 			menuItems.get(i).setStatus(status[i]);
 		}
 	}
-	
-	public void hideMenu()
-	{
+
+	public void hideMenu() {
 		setVisible(false);
 	}
-	
-	public void switchMenu()
-	{
-		
+
+	public void switchMenu() {
+
 	}
-	
-	public void addMenuItem(float tX,float tY,int tIndex,Names tName)
-	{
-		MenuItem menuItem = new MenuItem(tIndex, this, tName);		
+
+	public void addMenuItem(float tX, float tY, int tIndex, Names tName) {
+		MenuItem menuItem = new MenuItem(tIndex, this, tName);
 		menuItem.setPosition(tX, tY);
 		menuItems.add(menuItem);
-		this.attachChild(menuItem);		
+		this.attachChild(menuItem);
+	}
+
+	private class MenuItem extends AnimatedSprite {
+
+		int index;
+		int status; // 0=wybrane 1=dostepne 2=zablokowane
+		Menu menu;
+
+		public MenuItem(int tIndex, Menu tMenu, Names tName) {
+			super(0, 0, AssetPool.getInstance().getTTR(tName));
+			index = tIndex;
+			menu = tMenu;
+			CdhActivity.lm.addButton(this);
+			
+		}
+
+		@Override
+		public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+				float pTouchAreaLocalX, float pTouchAreaLocalY) {			
+			if (status != 2 && menu.isVisible()) {
+				menu.work(index);
+
+			}
+			return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
+					pTouchAreaLocalY);
+		}
+
+		public void setStatus(int tStatus) {
+			status = tStatus;
+			setCurrentTileIndex(status);
+		}
 	}
 }

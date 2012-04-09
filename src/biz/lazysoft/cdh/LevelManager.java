@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
+import org.anddev.andengine.util.Debug;
 
 import biz.lazysoft.cdh.monsters.Monster;
 import biz.lazysoft.cdh.towers.Tower;
@@ -33,6 +34,7 @@ public class LevelManager {
 	}
 
 	public void removeMonster(Monster tMonster) {
+		Debug.d("Remove monster "+tMonster);
 		scene.detachChild(tMonster);
 		monsters.remove(tMonster);
 	}
@@ -68,13 +70,14 @@ public class LevelManager {
 
 	public void removeTowerSpot(TowerSpot tTowerSpot) {
 		scene.detachChild(tTowerSpot);
+		scene.unregisterTouchArea(tTowerSpot);
 		towerSpots.remove(tTowerSpot);
 	}
 
 	// Buttons
 
 	public void addButton(ITouchArea tButton) {
-		scene.registerTouchArea(tButton);
+		scene.registerTouchArea(tButton);		
 	}
 	
 	public void removeButton(ITouchArea tButton) {

@@ -102,9 +102,9 @@ public class CdhActivity extends BaseGame {
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				Debug.d("Towers size = " + lm.getTowers().size());
 				if(pSceneTouchEvent.isActionUp())Debug.d("TOUCH is up");
-				if(pSceneTouchEvent.isActionCancel())Debug.d("TOUCH is down");
-				
-				return true;
+				if(pSceneTouchEvent.isActionCancel())Debug.d("TOUCH is down");				
+				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
+						pTouchAreaLocalY);
 			}
 		};
 		scene.registerTouchArea(background);

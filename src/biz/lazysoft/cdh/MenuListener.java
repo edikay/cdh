@@ -7,5 +7,6 @@ public interface MenuListener {
 	public void action(int index);
 	public int[] getItemsStatus();
 	public PointF getPosition();
+	public void close();
 
 }

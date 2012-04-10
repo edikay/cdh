@@ -285,6 +285,11 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 			tY = this.getY();
 		return new PointF(tX, tY);
 	}
+	
+	@Override
+	public void close() {
+		spriteRange.setVisible(false);		
+	}
 
 
 }

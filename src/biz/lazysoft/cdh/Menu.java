@@ -12,6 +12,7 @@ import biz.lazysoft.cdh.andengine.AssetPool;
 
 public class Menu extends Sprite {
 
+	static Menu topMenu;
 	MenuListener menuListner;
 	ArrayList<MenuItem> menuItems;
 
@@ -30,6 +31,11 @@ public class Menu extends Sprite {
 
 	public void showMenu() {
 		
+		if(topMenu!=null)
+		{
+			topMenu.hideMenu();			
+		}
+		
 		PointF point = menuListner.getPosition();
 		setPosition(point.x, point.y);
 		this.setVisible(true);
@@ -37,10 +43,13 @@ public class Menu extends Sprite {
 		for (int i = 0; i < status.length; i++) {
 			menuItems.get(i).setStatus(status[i]);
 		}
+		
+		topMenu=this;
 	}
 
 	public void hideMenu() {
 		setVisible(false);
+		menuListner.close();
 	}
 
 	public void switchMenu() {

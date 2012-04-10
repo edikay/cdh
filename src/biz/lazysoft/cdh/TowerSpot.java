@@ -72,4 +72,10 @@ public class TowerSpot extends AnimatedSprite implements MenuListener {
 		return new PointF(0, 0);
 	}
 
+	@Override
+	public void close() {
+		
+		
+	}
+
 }

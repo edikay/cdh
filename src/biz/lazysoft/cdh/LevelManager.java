@@ -42,7 +42,7 @@ public class LevelManager {
 	// Tower
 
 	public void addTower(Tower tTower) {
-		scene.attachChild(tTower);
+		scene.getChild(0).attachChild(tTower);
 		scene.registerTouchArea(tTower);
 		towers.add(tTower);
 	}

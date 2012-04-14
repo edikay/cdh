@@ -27,7 +27,7 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 	float[] damage;
 	float[] range;
 	float[] cost;
-	int level = 0;
+	int level = 1;
 	Colors color;
 
 	private Colors bulletColor = Colors.red;

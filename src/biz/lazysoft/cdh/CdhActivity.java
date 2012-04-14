@@ -97,6 +97,7 @@ public class CdhActivity extends BaseGame {
 		AssetPool pool = AssetPool.getInstance();
 		scene = new Scene();
 		lm = new LevelManager(scene);
+		final WayPoint[] mapTrack = new WayPoint[]{new WayPoint(865, 0, 180), new WayPoint(865, 225, 270), new WayPoint(330, 225, 180), new WayPoint(330, 495, 90), new WayPoint(865, 495, 180), new WayPoint(865, 720, 180)};
 
 		Sprite background = new Sprite(0, 0, pool.getTR(Names.map0)) {
 			@Override
@@ -116,6 +117,8 @@ public class CdhActivity extends BaseGame {
 
 		Walus spider1 = new Walus();
 		final Rectangl spider2 = new Rectangl();
+		spider1.setTrack(mapTrack);
+		spider2.setTrack(mapTrack);
 		lm.addMonster(spider1);
 		lm.addMonster(spider2);
 
@@ -124,22 +127,21 @@ public class CdhActivity extends BaseGame {
 		 * cannon1.setLevel(1); lm.addTower(cannon1);
 		 */
 
-		final Track track = new Track();
-		WayPoint[] mapTrack = new WayPoint[]{new WayPoint(865, 0, 180), new WayPoint(865, 225, 270), new WayPoint(330, 225, 180), new WayPoint(330, 495, 90), new WayPoint(865, 495, 180), new WayPoint(865, 720, 180)};
-		track.setTrack(mapTrack);
+
+
 
 		AnimatedSprite bt1 = new AnimatedSprite(0, 0, pool.getTTR(Names.spider)) {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				spider2.move(track);
+				spider2.move();
 				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 						pTouchAreaLocalY);
 			}
 		};
 		scene.registerTouchArea(bt1);
 
-		spider1.move(track);
+		spider1.move();
 		
 
 		TimerHandler timer = new TimerHandler(0.1f, true, new ITimerCallback() {

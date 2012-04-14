@@ -6,7 +6,7 @@ import biz.lazysoft.cdh.Names;
 public class Rectangl extends Monster{
 
 	public Rectangl() {
-		super(Names.rectangl, 15, 300, 10,Colors.blue);
+		super(Names.rectangl, 80, 300, 10,Colors.blue);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -7,6 +7,7 @@ import biz.lazysoft.cdh.CdhActivity;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.Track;
+import biz.lazysoft.cdh.WayPoint;
 import biz.lazysoft.cdh.andengine.AssetPool;
 
 public abstract class Monster extends AnimatedSprite {
@@ -15,6 +16,7 @@ public abstract class Monster extends AnimatedSprite {
 	private float energy = 1;
 	private float power = 1;
 	private boolean alive = false;
+	Track track;
 	Colors color;
 
 	public Monster(Names name, float tSpeed, float tEnergy, float tPower,
@@ -24,13 +26,19 @@ public abstract class Monster extends AnimatedSprite {
 		energy = tEnergy;
 		power = tPower;
 		color = tColor;
+		track = new Track();
 
 	}
 	
-	public void move(Track tTrack) {
-		float length = tTrack.path.getLength();
+	public void setTrack(WayPoint... way)
+	{
+		track.setTrack(way);
+	}
+	
+	public void move() {
+		float length = track.path.getLength();
 		if (length != 0) {
-			this.registerEntityModifier(tTrack.getPathModiferMonster(this));
+			this.registerEntityModifier(track.getPathModiferMonster(this));
 			alive = true;
 		}
 

@@ -26,7 +26,7 @@ public abstract class Monster extends AnimatedSprite {
 		color = tColor;
 
 	}
-
+	
 	public void move(Track tTrack) {
 		float length = tTrack.path.getLength();
 		if (length != 0) {

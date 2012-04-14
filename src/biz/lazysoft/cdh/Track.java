@@ -8,7 +8,7 @@ import org.anddev.andengine.entity.modifier.PathModifier.Path;
 import org.anddev.andengine.util.Debug;
 
 import biz.lazysoft.cdh.monsters.Monster;
-import biz.lazysoft.cdh.towers.Tower;
+
 
 
 public class Track {
@@ -30,7 +30,9 @@ public class Track {
 
 	public PathModifier getPathModiferMonster(final Monster monster) {
 
+		Path path=calcPath(monster);
 		duration = path.getLength() / monster.getSpeed();
+		
 		return new PathModifier(duration, path, null,
 				new IPathModifierListener() {
 					@Override
@@ -95,6 +97,25 @@ public class Track {
 					}
 				});
 
+	}
+	
+	public Path calcPath(Monster monster)
+	{
+		float sizeMonster = monster.getWidth()/2;
+		float cx[] = path.getCoordinatesX();
+		float cy[] = path.getCoordinatesY();
+		
+		float ncx[] = path.getCoordinatesX();
+		float ncy[] = path.getCoordinatesY();
+		
+		for(int i=0;i<cx.length;i++)
+		{
+			
+			ncx[i]=cx[i]-sizeMonster;
+			ncy[i]=cy[i]-sizeMonster;
+			Debug.d("step "+i+" : x="+cx[i]+" , cy="+cy[i]);
+		}
+		return new Path(ncx,ncy);
 	}
 	
 	

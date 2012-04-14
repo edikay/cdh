@@ -88,6 +88,8 @@ public class CdhActivity extends BaseGame {
 				1024);
 
 	}
+	
+	
 
 	@Override
 	public Scene onLoadScene() {
@@ -100,9 +102,11 @@ public class CdhActivity extends BaseGame {
 			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				Debug.d("Towers size = " + lm.getTowers().size());
+				
+				Debug.d("Click on BACKGROUND");
+				
 				if(pSceneTouchEvent.isActionUp())Debug.d("TOUCH is up");
-				if(pSceneTouchEvent.isActionCancel())Debug.d("TOUCH is down");				
+				if(pSceneTouchEvent.isActionDown())Debug.d("TOUCH is down");			
 				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 						pTouchAreaLocalY);
 			}
@@ -121,7 +125,8 @@ public class CdhActivity extends BaseGame {
 		 */
 
 		final Track track = new Track();
-		track.setTrack(new WayPoint(220, 0, 180), new WayPoint(220, 600, 90));
+		WayPoint[] mapTrack = new WayPoint[]{new WayPoint(865, 0, 180), new WayPoint(865, 225, 270), new WayPoint(330, 225, 180), new WayPoint(330, 495, 90), new WayPoint(865, 495, 180), new WayPoint(865, 720, 180)};
+		track.setTrack(mapTrack);
 
 		AnimatedSprite bt1 = new AnimatedSprite(0, 0, pool.getTTR(Names.spider)) {
 			@Override
@@ -135,7 +140,7 @@ public class CdhActivity extends BaseGame {
 		scene.registerTouchArea(bt1);
 
 		spider1.move(track);
-		spider1.setPosition(0, 0);
+		
 
 		TimerHandler timer = new TimerHandler(0.1f, true, new ITimerCallback() {
 

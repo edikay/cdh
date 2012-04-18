@@ -7,6 +7,7 @@ import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.util.Debug;
 
+import android.graphics.PointF;
 import biz.lazysoft.cdh.monsters.Monster;
 import biz.lazysoft.cdh.towers.Tower;
 
@@ -35,7 +36,7 @@ public class LevelManager {
 
 	public void removeMonster(Monster tMonster) {
 		Debug.d("Remove monster "+tMonster);
-		scene.detachChild(tMonster);
+		//scene.detachChild(tMonster);
 		monsters.remove(tMonster);
 	}
 
@@ -96,5 +97,62 @@ public class LevelManager {
 		scene.detachChild(tEntity);
 	}
 	
+	//set on map
+	
+	public void addObject(Objects obj,String pos)
+	{
+		IEntity entity=null;
+		if(obj==Objects.TowerSpot)
+		{
+			TowerSpot tmp = new TowerSpot();
+			addTowerSpot(tmp);
+			entity=tmp;
+		}
+		
+		if(entity!=null)
+		{
+			setEntity(entity, pos);
+		}
+	}
+	
+	private void setEntity(IEntity tEntity,String tPosition){
+		float px,py;
+		PointF point = getPonint(tPosition);
+		px=point.x;
+		py=point.y;
+		tEntity.setPosition(px, py);
+		
+	}
+	
+	private PointF getPonint(String tPosition)
+	{
+		String position=tPosition.toUpperCase();
+		float px=15;
+		float py=0;
+		
+		int column=0;
+		int line=0;
+		
+		String partX="";
+		String partY="";
+		partX=position.substring(0, 1);
+		partY=position.substring(1, 2);
+		
+		try{
+			
+		
+		line=Integer.parseInt(partY)-1;
+		column=partX.charAt(0)-65;
+		
+		px+=column*90;
+		py+=line*90;
+		}catch(Exception e)
+		{
+			Debug.d("Blad wspolrzednych");
+		}
+			
+		PointF point = new PointF(px, py);
+		return point;
+	}
 	
 }

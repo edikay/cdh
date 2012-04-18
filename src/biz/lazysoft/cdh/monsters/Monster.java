@@ -62,13 +62,19 @@ public abstract class Monster extends AnimatedSprite {
 			Debug.d("Monster energy = "+energy);
 			if (energy <= 0) {
 				CdhActivity.lm.removeMonster(this);
-				this.alive = false;
+				setAlive(false);
 			}
 		}
 	}
 
 	public boolean isAlive() {
 		return alive;
+	}
+	
+	public void setAlive(boolean b){
+		alive=b;
+		if(alive==true)setVisible(true);
+		else setVisible(false);
 	}
 
 }

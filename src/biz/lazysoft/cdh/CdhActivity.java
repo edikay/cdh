@@ -2,12 +2,14 @@ package biz.lazysoft.cdh;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.Camera;
+import org.anddev.andengine.engine.handler.IUpdateHandler;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
@@ -100,7 +102,7 @@ public class CdhActivity extends BaseGame {
 		final WayPoint[] mapTrack = new WayPoint[]{new WayPoint(865, 0, 180), new WayPoint(865, 225, 270), new WayPoint(330, 225, 180), new WayPoint(330, 495, 90), new WayPoint(865, 495, 180), new WayPoint(865, 720, 180)};
 
 		Sprite background = new Sprite(0, 0, pool.getTR(Names.map0)) {
-			@Override
+			/*@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
@@ -110,11 +112,12 @@ public class CdhActivity extends BaseGame {
 				if(pSceneTouchEvent.isActionDown())Debug.d("TOUCH is down");			
 				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 						pTouchAreaLocalY);
-			}
+			}*/
 		};
 		scene.registerTouchArea(background);
 		scene.attachChild(background);
-
+		
+	
 		Walus spider1 = new Walus();
 		final Rectangl spider2 = new Rectangl();
 		spider1.setTrack(mapTrack);
@@ -157,13 +160,8 @@ public class CdhActivity extends BaseGame {
 		});
 		scene.registerUpdateHandler(timer);
 
-		TowerSpot towerSpot1 = new TowerSpot();
-		towerSpot1.setPosition(50, 360);
-		TowerSpot towerSpot2 = new TowerSpot();
-		towerSpot2.setPosition(50, 270);
-		lm.addTowerSpot(towerSpot1);
-		lm.addTowerSpot(towerSpot2);
-
+		lm.addObject(Objects.TowerSpot, "E4");
+		lm.addObject(Objects.TowerSpot, "e5");
 		return scene;
 	}
 

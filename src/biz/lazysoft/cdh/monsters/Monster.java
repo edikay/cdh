@@ -14,7 +14,7 @@ public abstract class Monster extends AnimatedSprite {
 
 	private float speed = 1;
 	private float energy = 1;
-	private float power = 1;
+	private float power = 1;	
 	private boolean alive = false;
 	Track track;
 	Colors color;

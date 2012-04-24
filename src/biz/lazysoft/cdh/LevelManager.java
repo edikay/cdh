@@ -28,6 +28,7 @@ public class LevelManager {
 	public void addMonster(Monster tMonster) {
 		scene.attachChild(tMonster);
 		monsters.add(tMonster);
+		sort();
 	}
 
 	public ArrayList<Monster> getMonsters() {
@@ -153,6 +154,13 @@ public class LevelManager {
 			
 		PointF point = new PointF(px, py);
 		return point;
+	}
+	
+	//sort
+	
+	public void sort()
+	{
+		scene.sortChildren();
 	}
 	
 }

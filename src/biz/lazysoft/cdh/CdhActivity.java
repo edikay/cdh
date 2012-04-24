@@ -102,19 +102,18 @@ public class CdhActivity extends BaseGame {
 		final WayPoint[] mapTrack = new WayPoint[]{new WayPoint(865, 0, 180), new WayPoint(865, 225, 270), new WayPoint(330, 225, 180), new WayPoint(330, 495, 90), new WayPoint(865, 495, 180), new WayPoint(865, 720, 180)};
 
 		Sprite background = new Sprite(0, 0, pool.getTR(Names.map0)) {
-			/*@Override
+			@Override
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 					float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				
-				Debug.d("Click on BACKGROUND");
-				
-				if(pSceneTouchEvent.isActionUp())Debug.d("TOUCH is up");
-				if(pSceneTouchEvent.isActionDown())Debug.d("TOUCH is down");			
+				Debug.d("Click on BACKGROUND");				
+				//if(pSceneTouchEvent.isActionUp())Debug.d("TOUCH is up");
+				//if(pSceneTouchEvent.isActionDown())Debug.d("TOUCH is down");			
 				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 						pTouchAreaLocalY);
-			}*/
+			}
 		};
-		scene.registerTouchArea(background);
+		
 		scene.attachChild(background);
 		
 	
@@ -160,8 +159,9 @@ public class CdhActivity extends BaseGame {
 		});
 		scene.registerUpdateHandler(timer);
 
-		lm.addObject(Objects.TowerSpot, "E4");
+		//lm.addObject(Objects.TowerSpot, "E4");
 		lm.addObject(Objects.TowerSpot, "e5");
+		scene.registerTouchArea(background);
 		return scene;
 	}
 

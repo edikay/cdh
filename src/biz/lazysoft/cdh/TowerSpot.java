@@ -34,13 +34,13 @@ public class TowerSpot extends AnimatedSprite implements MenuListener {
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
 		Debug.d("Click on TOWERSPOT");
-		
+		//if(pSceneTouchEvent.isActionDown())Debug.d("Click DOWN");
+		//if(pSceneTouchEvent.isActionUp())Debug.d("Click UP");
 		if(this.isVisible())
 		{
 			menu.showMenu();
 		}
-		return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
-				pTouchAreaLocalY);
+		return false;
 	}
 
 	@Override

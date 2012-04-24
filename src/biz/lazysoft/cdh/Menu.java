@@ -62,27 +62,38 @@ public class Menu extends Sprite {
 		menuItems.add(menuItem);
 		this.attachChild(menuItem);
 	}
+	
+	public static void closeTopMenu()
+	{
+		if(topMenu!=null)
+		{
+			topMenu.hideMenu();
+		}
+	}
 
 	private class MenuItem extends AnimatedSprite {
 
 		int index;
-		int status; // 0=wybrane 1=dostepne 2=zablokowane
+		int status; // 0=wybrane 1=dostepne 2=zablokowane 3=closemenu
 		Menu menu;
 
 		public MenuItem(int tIndex, Menu tMenu, Names tName) {
 			super(0, 0, AssetPool.getInstance().getTTR(tName));
 			index = tIndex;
 			menu = tMenu;
-			CdhActivity.lm.addButton(this);
+			CdhActivity.lm.addButton(this);	
 			
 		}
 
 		@Override
 		public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 				float pTouchAreaLocalX, float pTouchAreaLocalY) {			
-			if (status != 2 && menu.isVisible()) {
+			if (status < 2 && menu.isVisible()) {
 				menu.work(index);
 
+			}else if(status==3 && menu.isVisible())
+			{
+				menu.hideMenu();
 			}
 			return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
 					pTouchAreaLocalY);

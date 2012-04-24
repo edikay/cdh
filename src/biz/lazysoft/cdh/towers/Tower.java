@@ -204,7 +204,10 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 		float x = monster.getX() - getX();
 		float y = monster.getY() - getY();
 		if (x != 0)
-			return (float) Math.toDegrees(Math.atan(y / x)) + 90;
+			if (x > 0)
+				return (float) Math.toDegrees(Math.atan(y / x)) + 90;
+			else
+				return (float) Math.toDegrees(Math.atan(y / x)) + 270;
 		return 0;
 	}
 

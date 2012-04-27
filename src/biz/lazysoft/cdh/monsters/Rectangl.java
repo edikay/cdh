@@ -8,9 +8,8 @@ public class Rectangl extends Monster{
 	
 	
 	public Rectangl() {
-		super(Names.rectangl, 80, 300, 10,Colors.blue);
-		// TODO Auto-generated constructor stub
-		setZIndex(100);
+		super(Names.rectangl, 80, 300, 10,Colors.blue);		
+		setZIndex(140);
 	}
 
 }

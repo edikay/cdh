@@ -8,6 +8,7 @@ public enum Names {
 	range,
 	bullet,
 	walus,
+	touchCatcher,
 	rectangl,
 	octopus,
 	towermenubg,

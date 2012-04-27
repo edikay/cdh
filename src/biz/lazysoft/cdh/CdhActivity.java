@@ -80,6 +80,9 @@ public class CdhActivity extends BaseGame {
 				2048, 1024, 1, 3);
 		pool.loadTiledTextureRegion(Names.cannonicon, "misc/cannon_icon.png",
 				2048, 1024, 1, 3);
+		pool.loadTiledTextureRegion(Names.touchCatcher, "misc/touch_catcher.png",
+				2048, 1024,1,1);
+		
 
 		// Image
 		pool.loadTextureRegion(Names.map0, "levels/level1map.png", 2048, 1024);
@@ -88,6 +91,8 @@ public class CdhActivity extends BaseGame {
 				2048, 1024);
 		pool.loadTextureRegion(Names.towermenubg, "misc/tower_menu.png", 2048,
 				1024);
+		pool.loadTextureRegion(Names.touchCatcher, "misc/touch_catcher.png",
+				2048, 1024);
 
 	}
 	
@@ -116,13 +121,20 @@ public class CdhActivity extends BaseGame {
 		
 		scene.attachChild(background);
 		
-	
+		TouchManager tm = new TouchManager(scene);
 		Walus spider1 = new Walus();
 		final Rectangl spider2 = new Rectangl();
+		Spider spider3 = new Spider();
+		Walus spider4 = new Walus();
 		spider1.setTrack(mapTrack);
 		spider2.setTrack(mapTrack);
+		spider3.setTrack(mapTrack);
+		spider4.setTrack(mapTrack);
+		
 		lm.addMonster(spider1);
 		lm.addMonster(spider2);
+		lm.addMonster(spider3);
+		lm.addMonster(spider4);
 
 		/*
 		 * Cannon cannon1 = new Cannon(); cannon1.setPosition(50, 360);
@@ -159,8 +171,9 @@ public class CdhActivity extends BaseGame {
 		});
 		scene.registerUpdateHandler(timer);
 
-		//lm.addObject(Objects.TowerSpot, "E4");
+		lm.addObject(Objects.TowerSpot, "E4");
 		lm.addObject(Objects.TowerSpot, "e5");
+		lm.addObject(Objects.TowerSpot, "C5");
 		scene.registerTouchArea(background);
 		return scene;
 	}

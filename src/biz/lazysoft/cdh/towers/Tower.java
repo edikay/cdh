@@ -3,7 +3,6 @@ package biz.lazysoft.cdh.towers;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.input.touch.TouchEvent;
 import org.anddev.andengine.util.Debug;
@@ -15,19 +14,20 @@ import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Menu;
 import biz.lazysoft.cdh.MenuListener;
 import biz.lazysoft.cdh.Names;
+import biz.lazysoft.cdh.ObjectGame;
 import biz.lazysoft.cdh.TowerSpot;
 import biz.lazysoft.cdh.Track;
 import biz.lazysoft.cdh.WayPoint;
 import biz.lazysoft.cdh.andengine.AssetPool;
 import biz.lazysoft.cdh.monsters.Monster;
 
-public abstract class Tower extends AnimatedSprite implements MenuListener {
+public abstract class Tower extends ObjectGame implements MenuListener {
 
 	float[] rate;
 	float[] damage;
 	float[] range;
 	float[] cost;
-	int level = 1;
+	private int level = 1;
 	Colors color;
 
 	private Colors bulletColor = Colors.red;
@@ -38,11 +38,12 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 	private Sprite spriteRange;
 	
 	private TowerSpot towerSpot;
-
+	
 	Menu menu;
 
 	public Tower(Names name, Colors tColor,TowerSpot tTowerSpot) {
 		super(0, 0, 90, 90, AssetPool.getInstance().getTTR(name));
+		setZIndex(60);
 		rate = new float[3];
 		damage = new float[3];
 		range = new float[3];
@@ -53,9 +54,10 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 		setRange();
 
 		menu = new Menu(this, Names.towermenubg);
-		menu.addMenuItem(0, 0, 0, Names.el1);
-		menu.addMenuItem(80, 0, 1, Names.el2);
-		menu.addMenuItem(160, 0, 2, Names.el3);
+		menu.addMenuItem(0, 0, 1, Names.el1);
+		menu.addMenuItem(80, 0, 2, Names.el2);
+		menu.addMenuItem(160, 0, 3, Names.el3);
+		
 
 	}
 
@@ -131,15 +133,14 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 	}
 
 	@Override
-	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+	public boolean onTouched(TouchEvent pSceneTouchEvent,
 			float pTouchAreaLocalX, float pTouchAreaLocalY) {
 		Debug.d("CLICK ON TOWER");
 		if (menu.isVisible())
 			hideTowerMenu();
 		else
 			showTowerMenu();
-		return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
-				pTouchAreaLocalY);
+		return true;
 	}
 
 	// Metody obslugujace namierzenie Monstera i strzelanie
@@ -231,16 +232,22 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 	public void action(int index) {
 		switch (index) {
 		case 0:
-			bulletColor = Colors.red;
+			hideTowerMenu();
 			break;
 		case 1:
-			bulletColor = Colors.purple;
+			bulletColor = Colors.red;
+			showTowerMenu();
 			break;
 		case 2:
+			bulletColor = Colors.purple;
+			showTowerMenu();
+			break;
+		case 3:
 			bulletColor = Colors.blue;
+			showTowerMenu();
 			break;
 		}
-		hideTowerMenu();
+		
 	}
 
 	@Override
@@ -293,6 +300,5 @@ public abstract class Tower extends AnimatedSprite implements MenuListener {
 	public void close() {
 		spriteRange.setVisible(false);		
 	}
-
 
 }

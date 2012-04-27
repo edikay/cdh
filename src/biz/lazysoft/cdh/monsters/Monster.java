@@ -6,11 +6,12 @@ import org.anddev.andengine.util.Debug;
 import biz.lazysoft.cdh.CdhActivity;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
+import biz.lazysoft.cdh.ObjectGame;
 import biz.lazysoft.cdh.Track;
 import biz.lazysoft.cdh.WayPoint;
 import biz.lazysoft.cdh.andengine.AssetPool;
 
-public abstract class Monster extends AnimatedSprite {
+public abstract class Monster extends ObjectGame {
 
 	private float speed = 1;
 	private float energy = 1;
@@ -27,6 +28,7 @@ public abstract class Monster extends AnimatedSprite {
 		power = tPower;
 		color = tColor;
 		track = new Track();
+		setZIndex(100);
 
 	}
 	
@@ -75,6 +77,12 @@ public abstract class Monster extends AnimatedSprite {
 		alive=b;
 		if(alive==true)setVisible(true);
 		else setVisible(false);
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString()+" zIndex="+getZIndex();
 	}
 
 }

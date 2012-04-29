@@ -46,7 +46,7 @@ public class AssetPool {
 	// Constructors
 	// ===========================================================
 
-	private void AssetPool() {
+	private AssetPool() {
 	}
 	
 	// ===========================================================

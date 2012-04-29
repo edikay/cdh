@@ -9,7 +9,7 @@ import org.anddev.andengine.util.Debug;
 
 import android.graphics.PointF;
 import biz.lazysoft.cdh.Bullet;
-import biz.lazysoft.cdh.CdhActivity;
+import biz.lazysoft.cdh.Level;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Menu;
 import biz.lazysoft.cdh.MenuListener;
@@ -27,7 +27,7 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 	float[] damage;
 	float[] range;
 	float[] cost;
-	private int level = 1;
+	private int level = 0;
 	Colors color;
 
 	private Colors bulletColor = Colors.red;
@@ -57,6 +57,8 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 		menu.addMenuItem(0, 0, 1, Names.el1);
 		menu.addMenuItem(80, 0, 2, Names.el2);
 		menu.addMenuItem(160, 0, 3, Names.el3);
+		menu.addMenuItem(20, 110, 4, Names.upgrade);
+		menu.addMenuItem(142, 110, 5, Names.sell);
 		
 
 	}
@@ -65,7 +67,7 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 		spriteRange = new Sprite(this.getX(), this.getY(), AssetPool
 				.getInstance().getTR(Names.range));
 		spriteRange.setVisible(false);
-		CdhActivity.lm.addObject(spriteRange);
+		Level.lm.addObject(spriteRange);
 	}
 
 	private void showRange() {
@@ -246,18 +248,32 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 			bulletColor = Colors.blue;
 			showTowerMenu();
 			break;
+		case 4:
+			Debug.d("Tower upgrade");
+			showTowerMenu();
+			break;
+		case 5:
+			Debug.d("Tower sell");
+			hideTowerMenu();
+			setVisible(false);
+			sell();
+			break;
 		}
 		
 	}
 
 	@Override
 	public int[] getItemsStatus() {
-		int[] status = new int[3];
+		int[] status = new int[5];
+		
+		status[3] = 2;
+		status[4] = 1;
+		
 		switch (level) {
 		case 0:
 			status[0] = 1;
 			status[1] = 2;
-			status[2] = 2;
+			status[2] = 2;			
 			break;
 		case 1:
 			status[0] = 1;
@@ -299,6 +315,13 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 	@Override
 	public void close() {
 		spriteRange.setVisible(false);		
+	}
+
+	//sell i upgrade
+	
+	private void sell(){
+		//tutaj wywolaj(pierwsze dodaj) metode ktora zworci kase
+		towerSpot.removeTower(this);
 	}
 
 }

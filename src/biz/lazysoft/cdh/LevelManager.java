@@ -1,7 +1,6 @@
 package biz.lazysoft.cdh;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.scene.Scene;
@@ -9,11 +8,13 @@ import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.util.Debug;
 
 import android.graphics.PointF;
+import biz.lazysoft.cdh.andengine.BaseGame;
 import biz.lazysoft.cdh.monsters.Monster;
 import biz.lazysoft.cdh.towers.Tower;
 
 public class LevelManager {
 
+	Level game;
 	Scene scene;
 	TouchManager touchManager;
 	ArrayList<Monster> monsters = new ArrayList<Monster>();
@@ -21,8 +22,9 @@ public class LevelManager {
 	ArrayList<TowerSpot> towerSpots = new ArrayList<TowerSpot>();
 	ArrayList<ObjectGame> objects = new ArrayList<ObjectGame>();
 
-	LevelManager(Scene tScene) {
+	LevelManager(Scene tScene,Level game) {
 		scene = tScene;
+		this.game=game;
 		touchManager = new TouchManager(tScene);
 	}
 
@@ -57,7 +59,8 @@ public class LevelManager {
 	}
 
 	public void removeTower(Tower tTower) {
-		scene.detachChild(tTower);
+		
+		game.removeEntity(tTower);
 		towers.remove(tTower);
 	}
 

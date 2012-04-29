@@ -3,7 +3,7 @@ package biz.lazysoft.cdh.monsters;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.util.Debug;
 
-import biz.lazysoft.cdh.CdhActivity;
+import biz.lazysoft.cdh.Level;
 import biz.lazysoft.cdh.Colors;
 import biz.lazysoft.cdh.Names;
 import biz.lazysoft.cdh.ObjectGame;
@@ -63,7 +63,7 @@ public abstract class Monster extends ObjectGame {
 			energy -= damage;
 			Debug.d("Monster energy = "+energy);
 			if (energy <= 0) {
-				CdhActivity.lm.removeMonster(this);
+				Level.lm.removeMonster(this);
 				setAlive(false);
 			}
 		}

@@ -16,7 +16,7 @@ public class TowerSpot extends ObjectGame implements MenuListener {
 	public TowerSpot() {
 		super(0, 0, 90, 90, AssetPool.getInstance().getTTR(Names.towerspot));
 		setZIndex(50);
-		CdhActivity.lm.addButton(this);
+		Level.lm.addButton(this);
 		menu = new Menu(this, Names.towerspotmenu);
 		//menu.addMenuItem(0, 0, 0, Names.closeicon);
 		menu.addMenuItem(170, 0, 1, Names.cannonicon);
@@ -30,6 +30,13 @@ public class TowerSpot extends ObjectGame implements MenuListener {
 
 	public void show() {		
 		this.setVisible(true);
+	}
+	
+	public void removeTower(Tower tower)
+	{
+		this.setVisible(true);
+		Level.lm.removeTower(tower);
+		
 	}
 
 	
@@ -58,7 +65,7 @@ public class TowerSpot extends ObjectGame implements MenuListener {
 		menu.hideMenu();
 		if (tower != null) {
 			tower.setPosition(this);
-			CdhActivity.lm.addTower(tower);
+			Level.lm.addTower(tower);
 			hide();
 		}
 	}

@@ -19,7 +19,7 @@ public class Bullet extends AnimatedSprite {
 		damage = tDamage;
 		target = tTarget;
 		color = tColor;
-		CdhActivity.lm.addObject(this);
+		Level.lm.addObject(this);
 		refreshColor();
 	}
 

@@ -8,6 +8,7 @@ import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.anddev.andengine.entity.IEntity;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
@@ -24,7 +25,7 @@ import biz.lazysoft.cdh.monsters.Walus;
 import biz.lazysoft.cdh.towers.Cannon;
 import biz.lazysoft.cdh.towers.Tower;
 
-public class CdhActivity extends BaseGame {
+public class Level extends BaseGame {
 
 	private static final int CAMERA_WIDTH = 1200;
 	private static final int CAMERA_HEIGHT = 720;
@@ -32,7 +33,20 @@ public class CdhActivity extends BaseGame {
 	private Camera mCamera;
 	public static Scene scene;
 	public static LevelManager lm;
+	
+	
 
+	public  void removeEntity(final IEntity entity)
+	{
+		runOnUpdateThread(new Runnable() {
+            @Override
+            public void run() {
+                    /* Now it is save to remove the entity! */
+                    scene.detachChild(entity);
+            }
+    });
+	}
+	
 	@Override
 	public Engine onLoadEngine() {
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -45,7 +59,7 @@ public class CdhActivity extends BaseGame {
 		
 
 	}
-
+	
 	@Override
 	public void onLoadResources() {
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
@@ -82,6 +96,10 @@ public class CdhActivity extends BaseGame {
 				2048, 1024, 1, 3);
 		pool.loadTiledTextureRegion(Names.touchCatcher, "misc/touch_catcher.png",
 				2048, 1024,1,1);
+		pool.loadTiledTextureRegion(Names.sell, "misc/sell.png",
+				2048, 1024,1,3);
+		pool.loadTiledTextureRegion(Names.upgrade, "misc/upgrade.png",
+				2048, 1024,1,3);
 		
 
 		// Image
@@ -102,28 +120,19 @@ public class CdhActivity extends BaseGame {
 	public Scene onLoadScene() {
 
 		AssetPool pool = AssetPool.getInstance();
+		
 		scene = new Scene();
-		lm = new LevelManager(scene);
+		
+		lm = new LevelManager(scene,this);
+		
 		final WayPoint[] mapTrack = new WayPoint[]{new WayPoint(865, 0, 180), new WayPoint(865, 225, 270), new WayPoint(330, 225, 180), new WayPoint(330, 495, 90), new WayPoint(865, 495, 180), new WayPoint(865, 720, 180)};
 
-		Sprite background = new Sprite(0, 0, pool.getTR(Names.map0)) {
-			@Override
-			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
-					float pTouchAreaLocalX, float pTouchAreaLocalY) {
-				
-				Debug.d("Click on BACKGROUND");				
-				//if(pSceneTouchEvent.isActionUp())Debug.d("TOUCH is up");
-				//if(pSceneTouchEvent.isActionDown())Debug.d("TOUCH is down");			
-				return super.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX,
-						pTouchAreaLocalY);
-			}
-		};
-		
+		Sprite background = new Sprite(0, 0, pool.getTR(Names.map0));		
 		scene.attachChild(background);
 		
-		TouchManager tm = new TouchManager(scene);
 		Walus spider1 = new Walus();
 		final Rectangl spider2 = new Rectangl();
+		spider2.setPosition(150, 400);
 		Spider spider3 = new Spider();
 		Walus spider4 = new Walus();
 		spider1.setTrack(mapTrack);
@@ -136,10 +145,7 @@ public class CdhActivity extends BaseGame {
 		lm.addMonster(spider3);
 		lm.addMonster(spider4);
 
-		/*
-		 * Cannon cannon1 = new Cannon(); cannon1.setPosition(50, 360);
-		 * cannon1.setLevel(1); lm.addTower(cannon1);
-		 */
+		
 
 
 
@@ -162,7 +168,7 @@ public class CdhActivity extends BaseGame {
 
 			@Override
 			public void onTimePassed(TimerHandler pTimerHandler) {
-
+				Debug.d("Scene childs= "+scene.getChildCount());
 				for (Tower tower : lm.getTowers()) {
 					tower.work(lm.getMonsters());
 				}
@@ -182,5 +188,7 @@ public class CdhActivity extends BaseGame {
 	public void onLoadComplete() {
 
 	}
+	
+	
 
 }

@@ -21,7 +21,7 @@ public class Menu extends Sprite {
 		super(0, 0, AssetPool.getInstance().getTR(tName));
 		setZIndex(310);
 		this.setVisible(false);
-		CdhActivity.lm.addObject(this);
+		Level.lm.addObject(this);
 		menuListner = tMenuListener;
 		menuItems = new ArrayList<MenuItem>();
 		setCloseMenuItem();
@@ -107,7 +107,7 @@ public class Menu extends Sprite {
 			setZIndex(320);
 			index = tIndex;
 			menu = tMenu;
-			CdhActivity.lm.addButton(this);	
+			Level.lm.addButton(this);	
 			
 			setVisible(false);
 			

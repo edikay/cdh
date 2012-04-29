@@ -19,5 +19,7 @@ public enum Names {
 	closeicon,
 	el1,
 	el2,
-	el3
+	el3,
+	sell,
+	upgrade
 }

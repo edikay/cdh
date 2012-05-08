@@ -14,34 +14,47 @@ import biz.lazysoft.cdh.towers.Tower;
 
 public class LevelManager {
 
-	Level game;
-	Scene scene;
+	Level level;
 	TouchManager touchManager;
 	ArrayList<Monster> monsters = new ArrayList<Monster>();
 	ArrayList<Tower> towers = new ArrayList<Tower>();
-	ArrayList<TowerSpot> towerSpots = new ArrayList<TowerSpot>();
-	ArrayList<ObjectGame> objects = new ArrayList<ObjectGame>();
 
-	LevelManager(Scene tScene,Level game) {
-		scene = tScene;
-		this.game=game;
-		touchManager = new TouchManager(tScene);
+	
+
+	LevelManager(Level tLevel) {
+		level=tLevel;	
+		touchManager = new TouchManager(level.getScene());	
 	}
 
+	
+	private void addEntity(IEntity ent)
+	{
+		level.getScene().attachChild(ent);
+		sort();
+	}
+	
+	private void removeEntity(IEntity ent)
+	{
+		level.removeEntity(ent);
+	}
+	
+	private void registerTouch(ObjectGame obj)
+	{
+		touchManager.add(obj);
+	}
+	
 	// Monster
 
-	public void addMonster(Monster tMonster) {
-
-		scene.attachChild(tMonster);
-		monsters.add(tMonster);
-		sort();
+	public void add(Monster tMonster) {
+		addEntity(tMonster);
+		monsters.add(tMonster);		
 	}
 
 	public ArrayList<Monster> getMonsters() {
 		return monsters;
 	}
 
-	public void removeMonster(Monster tMonster) {
+	public void remove(Monster tMonster) {
 		Debug.d("Remove monster " + tMonster);
 		monsters.remove(tMonster);
 	}
@@ -49,7 +62,7 @@ public class LevelManager {
 	// Tower
 
 	public void addTower(Tower tTower) {
-		scene.attachChild(tTower);
+		addEntity(tTower);
 		touchManager.add(tTower);
 		towers.add(tTower);
 	}
@@ -58,29 +71,24 @@ public class LevelManager {
 		return towers;
 	}
 
-	public void removeTower(Tower tTower) {
-		
-		game.removeEntity(tTower);
+	public void removeTower(Tower tTower) {		
+		level.removeEntity(tTower);
 		towers.remove(tTower);
 	}
 
 	// Tower spot
 
-	public void addTowerSpot(TowerSpot tTowerSpot) {
-		scene.attachChild(tTowerSpot);
-		scene.registerTouchArea(tTowerSpot);
-		towerSpots.add(tTowerSpot);
+	public void add(TowerSpot tTowerSpot) {
+		addEntity(tTowerSpot);
+		registerTouch(tTowerSpot);		
 	}
 
-	public ArrayList<TowerSpot> getTowerSpots() {
-		return towerSpots;
-	}
+	
 
-	public void removeTowerSpot(TowerSpot tTowerSpot) {
+	/*public void removeTowerSpot(TowerSpot tTowerSpot) {
 		scene.detachChild(tTowerSpot);
-		scene.unregisterTouchArea(tTowerSpot);
-		towerSpots.remove(tTowerSpot);
-	}
+		scene.unregisterTouchArea(tTowerSpot);		
+	}*/
 
 	// Buttons
 
@@ -88,20 +96,20 @@ public class LevelManager {
 		touchManager.add(obj);
 	}
 
-	public void removeButton(ITouchArea tButton) {
+	/*public void removeButton(ITouchArea tButton) {
 		scene.unregisterTouchArea(tButton);
-		scene.sortChildren();
-	}
+		sort();
+	}*/
 
 	// Objects
 
 	public void addObject(IEntity tEntity) {
-		scene.attachChild(tEntity);
+		addEntity(tEntity);
 		sort();
 	}
 
 	public void removeObject(IEntity tEntity) {
-		scene.detachChild(tEntity);
+		removeEntity(tEntity);
 	}
 
 	// set on map
@@ -110,7 +118,7 @@ public class LevelManager {
 		IEntity entity = null;
 		if (obj == Objects.TowerSpot) {
 			TowerSpot tmp = new TowerSpot();
-			addTowerSpot(tmp);
+			add(tmp);
 			entity = tmp;
 		}
 
@@ -159,7 +167,7 @@ public class LevelManager {
 	// sort
 
 	public void sort() {
-		scene.sortChildren();
+		level.getScene().sortChildren();
 	}
 
 }

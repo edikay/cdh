@@ -250,6 +250,7 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 			break;
 		case 4:
 			Debug.d("Tower upgrade");
+			upgrade();
 			showTowerMenu();
 			break;
 		case 5:
@@ -266,7 +267,7 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 	public int[] getItemsStatus() {
 		int[] status = new int[5];
 		
-		status[3] = 2;
+		status[3] = 1;
 		status[4] = 1;
 		
 		switch (level) {
@@ -322,6 +323,16 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 	private void sell(){
 		//tutaj wywolaj(pierwsze dodaj) metode ktora zworci kase
 		towerSpot.removeTower(this);
+		Level.lm.removeObject(spriteRange);
+		Level.lm.removeObject(menu);
+	}
+	
+	private void upgrade()
+	{
+		if(level<3)
+		{
+			level++;
+		}
 	}
 
 }

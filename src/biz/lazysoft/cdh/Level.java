@@ -31,10 +31,14 @@ public class Level extends BaseGame {
 	private static final int CAMERA_HEIGHT = 720;
 
 	private Camera mCamera;
-	public static Scene scene;
+	private Scene scene;
 	public static LevelManager lm;
 	
 	
+	public Scene getScene()
+	{
+		return scene;
+	}
 
 	public  void removeEntity(final IEntity entity)
 	{
@@ -123,7 +127,7 @@ public class Level extends BaseGame {
 		
 		scene = new Scene();
 		
-		lm = new LevelManager(scene,this);
+		lm = new LevelManager(this);
 		
 		final WayPoint[] mapTrack = new WayPoint[]{new WayPoint(865, 0, 180), new WayPoint(865, 225, 270), new WayPoint(330, 225, 180), new WayPoint(330, 495, 90), new WayPoint(865, 495, 180), new WayPoint(865, 720, 180)};
 
@@ -140,10 +144,10 @@ public class Level extends BaseGame {
 		spider3.setTrack(mapTrack);
 		spider4.setTrack(mapTrack);
 		
-		lm.addMonster(spider1);
-		lm.addMonster(spider2);
-		lm.addMonster(spider3);
-		lm.addMonster(spider4);
+		lm.add(spider1);
+		lm.add(spider2);
+		lm.add(spider3);
+		lm.add(spider4);
 
 		
 

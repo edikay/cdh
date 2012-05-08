@@ -63,14 +63,20 @@ public abstract class Monster extends ObjectGame {
 			energy -= damage;
 			Debug.d("Monster energy = "+energy);
 			if (energy <= 0) {
-				Level.lm.removeMonster(this);
-				setAlive(false);
+				kill();
 			}
 		}
 	}
 
 	public boolean isAlive() {
 		return alive;
+	}
+	
+	private void kill()
+	{
+		Level.lm.remove(this);
+		setAlive(false);
+		//dodaj dodawanie kasy
 	}
 	
 	public void setAlive(boolean b){

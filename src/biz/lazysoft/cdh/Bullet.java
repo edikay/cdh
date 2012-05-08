@@ -37,9 +37,8 @@ public class Bullet extends AnimatedSprite {
 
 	public void hit() {
 		target.hit(damage);
-		this.setVisible(false);
-		//this.unregisterEntityModifier(path);
-		//CdhActivity.lm.removeObject(this);
+		this.setVisible(false);		
+		Level.lm.removeObject(this);
 	}
 
 	public void move(Track tTrack) {

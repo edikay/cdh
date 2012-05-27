@@ -2,6 +2,7 @@ package biz.lazysoft.cdh;
 
 
 import org.anddev.andengine.entity.IEntity;
+import org.anddev.andengine.entity.modifier.EntityModifier;
 import org.anddev.andengine.entity.modifier.PathModifier;
 import org.anddev.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.anddev.andengine.entity.modifier.PathModifier.Path;
@@ -29,7 +30,9 @@ public class Track {
 	}
 
 	public PathModifier getPathModiferMonster(final Monster monster) {
-
+		EntityModifier pa;
+		PathModifier as;
+		
 		Path path=calcPath(monster);
 		duration = path.getLength() / monster.getSpeed();
 		

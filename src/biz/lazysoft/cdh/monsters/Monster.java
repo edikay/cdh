@@ -76,7 +76,7 @@ public abstract class Monster extends ObjectGame {
 	{
 		Level.lm.remove(this);
 		setAlive(false);
-		//dodaj dodawanie kasy
+		Level.lm.addMoney(10);
 	}
 	
 	public void setAlive(boolean b){

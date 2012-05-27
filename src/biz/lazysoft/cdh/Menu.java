@@ -24,11 +24,7 @@ public class Menu extends Sprite {
 		Level.lm.addObject(this);
 		menuListner = tMenuListener;
 		menuItems = new ArrayList<MenuItem>();
-		setCloseMenuItem();
-		
-	
-		
-		
+		setCloseMenuItem();		
 	}
 
 	private void setCloseMenuItem()
@@ -79,6 +75,13 @@ public class Menu extends Sprite {
 	public void switchMenu() {
 
 	}
+	
+	public void remove(){
+		for(MenuItem item : menuItems)
+		{
+			Level.lm.removeButton(item);
+		}
+	}
 
 	public void addMenuItem(float tX, float tY, int tIndex, Names tName) {
 		MenuItem menuItem = new MenuItem(tIndex, this, tName);
@@ -95,6 +98,7 @@ public class Menu extends Sprite {
 			topMenu.hideMenu();
 		}
 	}
+	
 
 	private class MenuItem extends ObjectGame {
 
@@ -129,6 +133,12 @@ public class Menu extends Sprite {
 		public void setStatus(int tStatus) {
 			status = tStatus;
 			setCurrentTileIndex(status);
+		}
+		
+		@Override
+		protected void finalize() throws Throwable {
+			Level.lm.removeButton(this);
+			super.finalize();
 		}
 	}
 }

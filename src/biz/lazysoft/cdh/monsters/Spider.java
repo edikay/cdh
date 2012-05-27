@@ -6,7 +6,7 @@ import biz.lazysoft.cdh.Names;
 public class Spider extends Monster{
 
 	public Spider(){
-		super(Names.spider, 30, 10, 10,Colors.green);
+		super(Names.spider, 90, 10, 10,Colors.green);
 		setZIndex(110);
 	}
 

@@ -8,7 +8,7 @@ public class Rectangl extends Monster{
 	
 	
 	public Rectangl() {
-		super(Names.rectangl, 80, 9999999, 10,Colors.blue);		
+		super(Names.rectangl, 80, 2000, 10,Colors.blue);		
 		setZIndex(140);
 	}
 

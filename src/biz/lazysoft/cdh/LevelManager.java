@@ -18,6 +18,35 @@ public class LevelManager {
 	TouchManager touchManager;
 	ArrayList<Monster> monsters = new ArrayList<Monster>();
 	ArrayList<Tower> towers = new ArrayList<Tower>();
+	
+	private float money=500;
+	
+	public void spendMoney(float amount)
+	{
+		
+			money=money-amount;
+			
+		
+	}
+	
+	public boolean checkMoney(float amount)
+	{
+		if(money-amount>=0)
+		{			
+			return true;
+		}
+		else return false;
+	}
+	
+	public void addMoney(float amount)
+	{
+		money+=amount;
+	}
+	
+	public float getMoney()
+	{
+		return money;
+	}
 
 	
 
@@ -57,6 +86,7 @@ public class LevelManager {
 	public void remove(Monster tMonster) {
 		Debug.d("Remove monster " + tMonster);
 		monsters.remove(tMonster);
+		removeEntity(tMonster);
 	}
 
 	// Tower
@@ -73,6 +103,7 @@ public class LevelManager {
 
 	public void removeTower(Tower tTower) {		
 		level.removeEntity(tTower);
+		touchManager.remove(tTower);
 		towers.remove(tTower);
 	}
 
@@ -96,10 +127,10 @@ public class LevelManager {
 		touchManager.add(obj);
 	}
 
-	/*public void removeButton(ITouchArea tButton) {
-		scene.unregisterTouchArea(tButton);
-		sort();
-	}*/
+	public void removeButton(ObjectGame obj) {
+		touchManager.remove(obj);
+		
+	}
 
 	// Objects
 

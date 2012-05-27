@@ -16,8 +16,8 @@ public class Cannon extends Tower{
 		rate[1] = 1250;
 		rate[2] = 1000;
 		
-		damage[0] = 100;//150;
-		damage[1] = 150;//250;
+		damage[0] = 10;//150;
+		damage[1] = 50;//250;
 		damage[2] = 350;
 		
 		range[0] = 250;

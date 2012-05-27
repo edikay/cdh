@@ -36,12 +36,12 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 	private long lastFire;
 
 	private Sprite spriteRange;
-	
+
 	private TowerSpot towerSpot;
-	
+
 	Menu menu;
 
-	public Tower(Names name, Colors tColor,TowerSpot tTowerSpot) {
+	public Tower(Names name, Colors tColor, TowerSpot tTowerSpot) {
 		super(0, 0, 90, 90, AssetPool.getInstance().getTTR(name));
 		setZIndex(60);
 		rate = new float[3];
@@ -49,7 +49,7 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 		range = new float[3];
 		cost = new float[3];
 		color = tColor;
-		
+
 		towerSpot = tTowerSpot;
 		setRange();
 
@@ -59,7 +59,6 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 		menu.addMenuItem(160, 0, 3, Names.el3);
 		menu.addMenuItem(20, 110, 4, Names.upgrade);
 		menu.addMenuItem(142, 110, 5, Names.sell);
-		
 
 	}
 
@@ -196,7 +195,7 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 				Track track = new Track();
 				track.setTrack(start, end);
 				Bullet bullet = new Bullet(getBulletColor(), getDamage(),
-						target);				
+						target);
 				bullet.move(track);
 				this.animate(100, false);
 			}
@@ -227,8 +226,8 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 		else
 			return false;
 	}
-	
-	//Metody interfejsu MenuListener
+
+	// Metody interfejsu MenuListener
 
 	@Override
 	public void action(int index) {
@@ -260,21 +259,22 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 			sell();
 			break;
 		}
-		
+
 	}
 
 	@Override
 	public int[] getItemsStatus() {
 		int[] status = new int[5];
+
 		
-		status[3] = 1;
+		status[3] = checkNextLevelUpgrade();
 		status[4] = 1;
-		
+
 		switch (level) {
 		case 0:
 			status[0] = 1;
 			status[1] = 2;
-			status[2] = 2;			
+			status[2] = 2;
 			break;
 		case 1:
 			status[0] = 1;
@@ -312,27 +312,38 @@ public abstract class Tower extends ObjectGame implements MenuListener {
 			tY = this.getY();
 		return new PointF(tX, tY);
 	}
-	
+
 	@Override
 	public void close() {
-		spriteRange.setVisible(false);		
+		spriteRange.setVisible(false);
 	}
 
-	//sell i upgrade
-	
-	private void sell(){
-		//tutaj wywolaj(pierwsze dodaj) metode ktora zworci kase
+	// sell i upgrade
+
+	private void sell() {
+		Level.lm.addMoney(cost[level]);
 		towerSpot.removeTower(this);
+		menu.remove();
 		Level.lm.removeObject(spriteRange);
 		Level.lm.removeObject(menu);
 	}
-	
-	private void upgrade()
-	{
-		if(level<3)
+
+	private void upgrade() {
+		if (level < 3)
 		{
 			level++;
+			Level.lm.spendMoney(cost[level]);
 		}
+	}
+
+	private int checkNextLevelUpgrade() {
+		if (level < 2) {
+			if (Level.lm.checkMoney(cost[level + 1]))
+				return 1;//dostpene
+			else
+				return 2;//zablokowane
+		} else
+			return 2;//zablkonwae
 	}
 
 }

@@ -18,65 +18,53 @@ public class LevelManager {
 	TouchManager touchManager;
 	ArrayList<Monster> monsters = new ArrayList<Monster>();
 	ArrayList<Tower> towers = new ArrayList<Tower>();
-	
-	private float money=500;
-	
-	public void spendMoney(float amount)
-	{
-		
-			money=money-amount;
-			
-		
+
+	private float money = 500;
+
+	public void spendMoney(float amount) {
+
+		money = money - amount;
+
 	}
-	
-	public boolean checkMoney(float amount)
-	{
-		if(money-amount>=0)
-		{			
+
+	public boolean checkMoney(float amount) {
+		if (money - amount >= 0) {
 			return true;
-		}
-		else return false;
+		} else
+			return false;
 	}
-	
-	public void addMoney(float amount)
-	{
-		money+=amount;
+
+	public void addMoney(float amount) {
+		money += amount;
 	}
-	
-	public float getMoney()
-	{
+
+	public float getMoney() {
 		return money;
 	}
 
-	
-
 	LevelManager(Level tLevel) {
-		level=tLevel;	
-		touchManager = new TouchManager(level.getScene());	
+		level = tLevel;
+		touchManager = new TouchManager(level.getScene());
 	}
 
-	
-	private void addEntity(IEntity ent)
-	{
+	private void addEntity(IEntity ent) {
 		level.getScene().attachChild(ent);
 		sort();
 	}
-	
-	private void removeEntity(IEntity ent)
-	{
+
+	private void removeEntity(IEntity ent) {
 		level.removeEntity(ent);
 	}
-	
-	private void registerTouch(ObjectGame obj)
-	{
+
+	private void registerTouch(ObjectGame obj) {
 		touchManager.add(obj);
 	}
-	
+
 	// Monster
 
 	public void add(Monster tMonster) {
 		addEntity(tMonster);
-		monsters.add(tMonster);		
+		monsters.add(tMonster);
 	}
 
 	public ArrayList<Monster> getMonsters() {
@@ -101,7 +89,7 @@ public class LevelManager {
 		return towers;
 	}
 
-	public void removeTower(Tower tTower) {		
+	public void removeTower(Tower tTower) {
 		level.removeEntity(tTower);
 		touchManager.remove(tTower);
 		towers.remove(tTower);
@@ -111,15 +99,13 @@ public class LevelManager {
 
 	public void add(TowerSpot tTowerSpot) {
 		addEntity(tTowerSpot);
-		registerTouch(tTowerSpot);		
+		registerTouch(tTowerSpot);
 	}
 
-	
-
-	/*public void removeTowerSpot(TowerSpot tTowerSpot) {
-		scene.detachChild(tTowerSpot);
-		scene.unregisterTouchArea(tTowerSpot);		
-	}*/
+	/*
+	 * public void removeTowerSpot(TowerSpot tTowerSpot) {
+	 * scene.detachChild(tTowerSpot); scene.unregisterTouchArea(tTowerSpot); }
+	 */
 
 	// Buttons
 
@@ -129,7 +115,7 @@ public class LevelManager {
 
 	public void removeButton(ObjectGame obj) {
 		touchManager.remove(obj);
-		
+
 	}
 
 	// Objects
